@@ -1,0 +1,25 @@
+ion-content {
+    --background: #ffffff; /* Fondo blanco */
+  
+    ion-item {
+      margin-bottom: 16px;
+    }
+  
+    ion-button {
+      margin-top: 16px;
+    }
+  
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 16px;
+    }
+  
+    ion-input {
+      --padding-start: 0;
+      --padding-end: 0;
+    }
+  }
