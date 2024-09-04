@@ -1,0 +1,69 @@
+#body{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.background {
+    background-image: url('https://i.blogs.es/6f44f2/1366_2000-7-/1366_2000.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    z-index: -1; 
+    opacity: 0.8;
+    transition: filter 0.5s ease-in-out;
+  }
+  .gradient{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to top, black,transparent);
+    position: absolute;
+    top: 0; 
+    left: 0;
+  }
+
+#cartamenu{
+    margin-top: 80px;
+}       
+
+#armabtn ion-button{
+    color:#9c9c9c;
+    display:flex;
+    background-color: #ffffff;  
+    border-radius: 30px;
+    height: 50px;
+    width: 310px;
+    margin-left: 20px;
+    margin-top: 20px;
+    box-shadow: 0 5px 10px rgba(0,0,0);
+    border: 1px,solid,black;  
+}
+
+#crearbtn{
+    color: #9c9c9c;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #AD4141;
+    border-radius: 30px;
+    transition: background-color 0.5s ease-in-out;
+    box-shadow: 0 5px 10px rgba(0,0,0);
+    border: 1px,solid,black;  
+}
+
+#searchbar{
+    background-color: #ffffffff;
+    color: #ffffff;
+    border-radius: 10px;
+    width: 310px;
+    margin-top: 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0);
+    border: 1px,solid,black;
+}
