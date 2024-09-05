@@ -25,13 +25,17 @@
     height: 100%;
     width: 100%;
     background-image: linear-gradient(to top, black,transparent);
+    background-size : cover;
+    background-position: center bottom;
     position: absolute;
     top: 0; 
     left: 0;
+    
   }
 
 #cartamenu{
     margin-top: 80px
+    height 100%;
 }       
 
 #armabtn ion-button{
