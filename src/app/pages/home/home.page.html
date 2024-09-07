@@ -8,26 +8,30 @@
         animated="true"
       ></ion-searchbar>
     </ion-toolbar>
-    <div id="armabtn">
-      <ion-button size="small" color="custom-color">
+    <div>
+      <ion-button size="small" color="custom-color" id="armabtn">
         <ion-icon slot="end" name="color-fill-outline"></ion-icon>
         Arma tu menu
       </ion-button>
     </div>
-    <div id="cartamenu">
-      <ion-card>
-        <img
-          alt="arma tu menu"
-          src="https://tucomercio.co/laoficina/images/thumbs/0001193_arma-tu-menu-desde-15000-septiembre-04_550.png"
-        />
-        <ion-card-header>
-          <ion-card-title>Receta del dia </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          Selecciona que ingredientes tienes para tu menu.
-        </ion-card-content>
-        <ion-button id="crearbtn" color="custom-color">Crear</ion-button>
-      </ion-card>
-    </div>
+    <ion-button size="small" color="custom-color" id="compartebtn">
+      <ion-icon slot="end" name="share"></ion-icon>
+      Comparte tu receta
+    </ion-button>
+  </div>
+  <div id="cartamenu">
+    <ion-card>
+      <img
+        alt="arma tu menu"
+        src="https://tucomercio.co/laoficina/images/thumbs/0001193_arma-tu-menu-desde-15000-septiembre-04_550.png"
+      />
+      <ion-card-header>
+        <ion-card-title>Receta del dia </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Selecciona que ingredientes tienes para tu menu.
+      </ion-card-content>
+      <ion-button id="crearbtn" color="custom-color">Crear</ion-button>
+    </ion-card>
   </div>
 </ion-content>

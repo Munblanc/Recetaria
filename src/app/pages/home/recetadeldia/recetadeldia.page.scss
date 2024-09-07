@@ -1,0 +1,84 @@
+    .background {
+    background-image: url('https://i.blogs.es/6f44f2/1366_2000-7-/1366_2000.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    z-index: -1; 
+    opacity: 0.8;
+    transition: filter 0.5s ease-in-out;
+  }
+
+  #toolbar{
+    background-color: rgba(0,0,0,0.5);
+    margin:5px;
+    border-radius: 30px;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0; 
+    right: 0;
+    height: 8%;
+    width: 80%;
+    box-shadow: 0 5px 10px rgba(0,0,0);
+    border: 1px solid black;
+  }
+
+  #title{
+    margin-left: 5%;
+    font-size: 16px;
+  }
+
+  .chat-container {
+    width: 400px;
+    width: 100%;
+    height: 480px;
+    height:100%;
+    margin: 20 30 20 30px;
+    border: 1px solid black;
+    overflow: hidden;
+    background-color: #8d8d8d;
+    display: flex;
+    flex-direction: column;
+    opacity: 0.9;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    overflow-y: auto;
+    height: 300px; /* Ajusta según sea necesario */
+}
+
+.input-container {
+    
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+#message-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 0;
+}
+
+#send-button {
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+#send-button:hover {
+    background-color: #0056b3;
+}
