@@ -19,6 +19,17 @@
 
       <ion-button expand="full" type="submit">Iniciar Sesión</ion-button>
 
+      <!-- Nuevo botón para continuar con Google -->
+      <ion-button expand="full" color="light" (click)="continueWithGoogle()">
+        Continuar con Google
+        <ion-icon name="logo-google" slot="start"></ion-icon>
+      </ion-button>
+      
+      <ion-button expand="full" color="light" (click)="continueWithApple()">
+        <ion-icon name="logo-apple" slot="start"></ion-icon>
+        Continuar con Apple
+      </ion-button>
+
       <ion-item>
         <ion-label>¿No tienes una cuenta?</ion-label>
         <ion-button (click)="navToRegister()">Registrarse</ion-button>

@@ -1,25 +1,57 @@
 ion-content {
-    --background: #ffffff; /* Fondo blanco */
-  
-    ion-item {
-      margin-bottom: 16px;
-    }
-  
-    ion-button {
-      margin-top: 16px;
-    }
-  
-    .login-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding: 16px;
-    }
-  
-    ion-input {
-      --padding-start: 0;
-      --padding-end: 0;
-    }
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative; /* Asegura que el fondo se ajuste al contenedor */
+  --background: url('/assets/img/fondo_receta.jpg') no-repeat center center;
+  background-size: cover; /* La imagen cubrirá el contenedor sin distorsionarse */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-attachment: fixed; /* Mantiene el fondo fijo durante el desplazamiento */
+}
+
+.login-container {
+  max-width: 100%;   /* Ajusta el ancho máximo al 90% del contenedor */
+  width: 400px;     /* Define un ancho fijo para el contenedor */
+  margin: 120px auto;   /* Centra el contenedor horizontalmente */
+  padding: 20px;    /* Espacio interno para el contenido */
+  border-radius: 12px; /* Esquinas redondeadas */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 2); /* Sombra suave */
+  background-color: #ffffff; /* Fondo blanco para el formulario */
+  position: relative; /* Mantiene el contenedor centrado */ 
+}
+
+ion-content::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 10px; /* Ajusta la posición vertical del ícono */
+  left: 50%; /* Centra el ícono horizontalmente en el contenedor */
+  transform: translateX(-50%); /* Ajusta la posición del ícono para centrarlo */
+  width: 160px; /* Ajusta el tamaño del ícono */
+  height: 140px; /* Ajusta el tamaño del ícono */
+  background-image: url('/assets/icon/icono_receta.png'); /* Ruta del ícono */
+  background-size: contain; /* Asegura que el ícono se ajuste al contenedor sin distorsionarse */
+  background-repeat: no-repeat; /* Evita que el ícono se repita */
+  background-position: center; /* Centra el ícono dentro del área definida */
+  z-index: 2; /* Asegura que el ícono esté por encima del contenido */
+}
+
+ion-item {
+  --background: #f8f9fa;  
+  --border-radius: 8px;   
+  margin-bottom: 16px;    
+  padding: 10px;
+  --color: #000000;  
+}
+
+ion-label, ion-input {
+  --color: #000000;  
+}
+
+ion-button{
+  --background: #7b6b4e;    
+  color: #ffffff;
+  padding-top: 10px;
+}
