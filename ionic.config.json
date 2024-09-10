@@ -1,0 +1,7 @@
+{
+  "name": "adoptapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
