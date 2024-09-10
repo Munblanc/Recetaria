@@ -9,10 +9,17 @@
       ></ion-searchbar>
     </ion-toolbar>
     <div>
-      <ion-button size="small" color="custom-color" id="armabtn">
-        <ion-icon slot="end" name="color-fill-outline"></ion-icon>
-        Arma tu menu
-      </ion-button>
+      <ion-header>
+        <ion-button
+          size="small"
+          color="custom-color"
+          id="armabtn"
+          (click)="irARecetaDelDia()"
+        >
+          <ion-icon slot="end" name="color-fill-outline"></ion-icon>
+          Arma tu menú
+        </ion-button>
+      </ion-header>
     </div>
     <ion-button size="small" color="custom-color" id="compartebtn">
       <ion-icon slot="end" name="share"></ion-icon>
@@ -26,10 +33,10 @@
         src="https://tucomercio.co/laoficina/images/thumbs/0001193_arma-tu-menu-desde-15000-septiembre-04_550.png"
       />
       <ion-card-header>
-        <ion-card-title>Receta del dia </ion-card-title>
+        <ion-card-title>Receta del día</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        Selecciona que ingredientes tienes para tu menu.
+        Selecciona qué ingredientes tienes para tu menú.
       </ion-card-content>
       <ion-button id="crearbtn" color="custom-color">Crear</ion-button>
     </ion-card>
