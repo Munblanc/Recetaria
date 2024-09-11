@@ -1,0 +1,103 @@
+#body{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.background{
+    background-image: url('https://i.blogs.es/6f44f2/1366_2000-7-/1366_2000.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    z-index: -1; 
+    opacity: 0.8;
+    transition: filter 0.5s ease-in-out;
+  }
+  .background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(to top, black, transparent);
+    z-index: -1;
+    pointer-events: none;
+}
+
+#cartamenu{
+    margin-top: 80px
+    height 100%;
+}       
+
+#armabtn{
+    color:#000000;
+    background-color: #fffffff5;  
+    border-radius: 30px;
+    margin-top: 20px;
+    box-shadow: 0 5px 10px rgba(0,0,0);
+    border: 1px,solid,black;
+    height: 100%;
+    width: 100%;
+    height: 30px;
+    width: 200px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+#compartebtn{
+    color:#000000;
+    background-color: #fffffff5;  
+    border-radius: 30px;
+    margin-top: 20px;
+    box-shadow: 0 5px 10px rgba(0,0,0);
+    border: 1px,solid,black;
+    height: 100%;
+    width: 100%;
+    height: 30px;
+    width: 200px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#crearbtn{
+    color: #9c9c9c;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #AD4141;
+    border-radius: 30px;
+    transition: background-color 0.5s ease-in-out;
+    box-shadow: 0 5px 10px rgba(0,0,0);
+    border: 1px,solid,black;
+    height: 40%;
+    width: 20%;  
+}
+
+#toolbar{
+    border-radius: 10px;
+    min-width: 10px;
+    width: 80%;
+    margin-top: 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0);
+    border: 1px,solid,black;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#searchbar{
+    color: #dddddd;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
