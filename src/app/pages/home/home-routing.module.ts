@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -7,7 +8,8 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage
-  },  {
+  },
+  {
     path: 'recetadeldia',
     loadChildren: () => import('./recetadeldia/recetadeldia.module').then( m => m.RecetadeldiaPageModule)
   }
@@ -19,3 +21,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class HomePageRoutingModule {}
+

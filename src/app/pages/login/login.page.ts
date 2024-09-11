@@ -21,6 +21,15 @@ export class LoginPage {
     }
   }
 
+
+  continueWithGoogle() {
+    // Lógica para continuar con Google
+  }
+
+  continueWithApple() {
+    // Lógica para continuar con Apple
+  }
+  
   navToRegister() {
     this.navCtrl.navigateForward('/register');
   }

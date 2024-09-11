@@ -1,3 +1,91 @@
+
+ion-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative; 
+  --background: url('/assets/img/fondo_receta.jpg') no-repeat center center;
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+}
+
+.register-container {
+  max-width: 100%;   
+  width: 400px;   
+  margin: 130px auto;  
+  padding: 20px;   
+  border-radius: 12px; 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 2); 
+  background-color: #ffffff; 
+  position: relative; 
+}
+
+.header-text {
+  text-align: center; 
+  margin-bottom: 20px; 
+}
+
+h1, p {
+  color: #000000;
+  margin-top: 20px;
+}
+
+.header-text h1 {
+  margin: 0; 
+  font-size: 1.5rem; 
+}
+
+.header-text p {
+  margin: 0; 
+  font-size: 1rem; 
+}
+
+ion-item {
+  --background: #f8f9fa; 
+  --border-radius: 8px; 
+  margin-bottom: 16px; 
+  padding: 10px;
+  --color: #000000; 
+}
+
+ion-label, ion-input {
+  --color: #000000; 
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem; 
+  margin-top: 5px; 
+}
+
+.invalid {
+  border-color: red; 
+}
+
+ion-content::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 50%; 
+  transform: translateX(-50%); 
+  width: 160px; 
+  height: 140px; 
+  background-image: url('/assets/icon/icono_receta.png'); 
+  background-size: contain; 
+  background-repeat: no-repeat; 
+  background-position: center; 
+  z-index: 2; 
+}
+
+ion-button{
+  --background: #7b6b4e;     
+  color: #ffffff;
+}
+
 h1,p{
     color: #000000;
 }
@@ -32,4 +120,4 @@ ion-content {
     color: rgb(255, 0, 0); /* Color rojo para el texto del mensaje de error */
     margin-top: 4px; /* Espacio entre el campo de entrada y el mensaje de error */
   }
-  
+
