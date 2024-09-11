@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'share',
     loadChildren: () => import('./pages/share/share.module').then( m => m.SharePageModule)
   },
+  {
+    path: 'fridge',
+    loadChildren: () => import('./pages/fridge/fridge.module').then( m => m.FridgePageModule)
+  },
 
 ];
 
