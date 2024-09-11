@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Qué hay en tu refri?</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <form>
+    <ion-list-header>
+      <ion-label>Ingredientes</ion-label>
+      <ion-button fill="clear" size="small">
+        <ion-icon name="add" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-list-header>
+
+    <ion-list>
+      <ion-item>
+        <ion-input [name]="'ingredient'" placeholder="Ingrediente"></ion-input>
+        <ion-button fill="clear" slot="end">
+          <ion-icon name="trash" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-button expand="block" type="submit">Guardar</ion-button>
+  </form>
+</ion-content>
+

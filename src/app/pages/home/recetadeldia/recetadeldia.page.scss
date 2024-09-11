@@ -1,0 +1,97 @@
+.background{
+    background-image: url('https://i.blogs.es/6f44f2/1366_2000-7-/1366_2000.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    z-index: -1; 
+    opacity: 0.8;
+    transition: filter 0.5s ease-in-out;
+  }
+  .background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(to top, black, transparent);
+    z-index: -1;
+    pointer-events: none;   
+}
+#toolbar {
+    width: 100%; /* Aumentar el ancho para mayor visibilidad */
+    height: max-content;    
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3); /* Sombra más sutil */
+    border: 1px solid black; /* Corregir el uso de comas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.7); /* Color de fondo semitransparente */
+}
+
+#header1 {color: white;
+    font-family: cursive;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  .chat-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px; /* Bordes redondeados */
+    overflow: hidden;
+    background-color: #f5f5f5; /* Fondo más claro */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra para un mejor efecto visual */
+    opacity: 0.65;
+    display:flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.chat-box {
+    border-bottom: 1px solid #ccc;
+    overflow-y: auto;
+    background-color: #fff; /* Fondo blanco para el área del chat */
+    height: 90%;
+    height: 300px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+//container del input
+.input-container {
+    display: flex;
+    align-items: center; /* Alinea verticalmente el contenido */
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ccc;
+    width: 100%;
+}
+
+//tamaño del input de receta
+#message-input {
+    flex: 1; /* Permite que el input ocupe el espacio restante */
+    padding: 10px;
+    border: 1px solid #ccc; /* Ajustar el borde */
+    border-radius: 5px;
+    margin-right: 10px; /* Espaciado entre el input y el botón */
+}
+
+#send-button {
+    padding: 10px 15px; /* Asegurar un tamaño adecuado */
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#send-button:hover {
+    background-color: #0056b3;
+}

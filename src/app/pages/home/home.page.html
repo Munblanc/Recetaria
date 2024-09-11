@@ -1,20 +1,44 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      AdoptApp
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Bienvenido a AdoptApp</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      Encuentra el compañero perfecto para ti.
-    </ion-card-content>
-  </ion-card>
-
-  <ion-button expand="full" routerLink="/adoptar">Ver Animales Disponibles</ion-button>
+  <div class="gradient"><div class="background"></div></div>
+  <div id="body">
+    <ion-toolbar id="toolbar">
+      <ion-searchbar
+        id="searchbar"
+        placeholder="Buscar recetas"
+        animated="true"
+      ></ion-searchbar>
+    </ion-toolbar>
+    <div>
+      <ion-header>
+        <ion-button
+          size="small"
+          color="custom-color"
+          id="armabtn"
+          (click)="irARecetaDelDia()"
+        >
+          <ion-icon slot="end" name="color-fill-outline"></ion-icon>
+          Arma tu menú
+        </ion-button>
+      </ion-header>
+    </div>
+    <ion-button size="small" color="custom-color" id="compartebtn">
+      <ion-icon slot="end" name="share"></ion-icon>
+      Comparte tu receta
+    </ion-button>
+  </div>
+  <div id="cartamenu">
+    <ion-card>
+      <img
+        alt="arma tu menu"
+        src="https://tucomercio.co/laoficina/images/thumbs/0001193_arma-tu-menu-desde-15000-septiembre-04_550.png"
+      />
+      <ion-card-header>
+        <ion-card-title>Receta del día</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Selecciona qué ingredientes tienes para tu menú.
+      </ion-card-content>
+      <ion-button id="crearbtn" color="custom-color">Crear</ion-button>
+    </ion-card>
+  </div>
 </ion-content>

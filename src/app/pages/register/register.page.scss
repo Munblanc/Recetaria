@@ -1,3 +1,4 @@
+
 ion-content {
   display: flex;
   align-items: center;
@@ -84,3 +85,39 @@ ion-button{
   --background: #7b6b4e;     
   color: #ffffff;
 }
+
+h1,p{
+    color: #000000;
+}
+ion-content {
+    --background: #ffffff; /* Fondo blanco para el contenido */
+  }
+  
+  ion-item {
+    position: relative; /* Establece posición relativa para los elementos hijos absolutos */
+    margin-bottom: 16px;
+    --background: #ffffff; /* Fondo blanco para el contenedor del item */
+    --border-radius: 12px; /* Esquinas redondeadas */
+    --padding: 0; /* Elimina el padding para que el fondo sea uniforme */
+    border: none; /* Elimina el borde del item */
+    color: #000000;
+  }
+  
+  ion-input {
+    --background: transparent; /* Fondo transparente para el campo de entrada */
+    --border-radius: 12px; /* Esquinas redondeadas para el campo de entrada */
+    --color: #000000; /* Color del texto dentro del campo de entrada */
+    border: none; /* Elimina el borde del campo de entrada */
+
+  }
+  
+  ion-label {
+    color: #000000; 
+  }
+  
+  .error-message {
+    font-size: 0.75em;
+    color: rgb(255, 0, 0); /* Color rojo para el texto del mensaje de error */
+    margin-top: 4px; /* Espacio entre el campo de entrada y el mensaje de error */
+  }
+

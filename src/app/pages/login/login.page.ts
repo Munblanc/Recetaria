@@ -21,6 +21,7 @@ export class LoginPage {
     }
   }
 
+
   continueWithGoogle() {
     // Lógica para continuar con Google
   }

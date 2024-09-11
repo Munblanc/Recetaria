@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { FridgePageRoutingModule } from './fridge-routing.module';
 
-import { HomePage } from './home.page';
+import { FridgePage } from './fridge.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    FridgePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [FridgePage]
 })
-export class HomePageModule {}
+export class FridgePageModule {}

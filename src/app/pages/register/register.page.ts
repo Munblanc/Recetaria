@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth.service'; 
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
