@@ -11,6 +11,11 @@ export class HomePage {
   constructor(private navCtrl: NavController) {}
 
   irARecetaDelDia() {
-    this.navCtrl.navigateForward('/home/recetadeldia');  
+    this.navCtrl.navigateForward('/tabs/home/recetadeldia');
+  }
+
+  irAShare() {
+    this.navCtrl.navigateForward('/tabs/share');
   }
 }
+

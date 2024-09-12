@@ -1,0 +1,49 @@
+ion-tabs {
+    --background: #ffffff; 
+  }
+  
+  ion-tab-bar {
+    --background: #ffffff; 
+    --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    --color: #888888; 
+    padding-bottom: 30px;
+  }
+  
+  ion-tab-button {
+    --color: #888888; 
+    --color-selected: #000000; 
+    
+  }
+  
+  ion-tab-button[tab="home"] {
+    --color: #888888; 
+  }
+  
+  ion-tab-button[tab="home"].tab-selected {
+    --color: #000000; 
+  }
+  
+  ion-tab-button[tab="share"] {
+    --color: #888888; 
+  }
+  
+  ion-tab-button[tab="share"].tab-selected {
+    --color: #000000; 
+  }
+  
+  ion-tab-button[tab="fridge"] {
+    --color: #888888; 
+  }
+  
+  ion-tab-button[tab="fridge"].tab-selected {
+    --color: #000000; 
+  }
+  
+  ion-tab-button[tab="profile"] {
+    --color: #888888; 
+  }
+  
+  ion-tab-button[tab="profile"].tab-selected {
+    --color: #000000; 
+  }
+  

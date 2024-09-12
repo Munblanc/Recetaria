@@ -1,5 +1,13 @@
+
+  <ion-toolbar>
+    <ion-title>Inicio</ion-title>
+  </ion-toolbar>
+
+
 <ion-content>
-  <div class="gradient"><div class="background"></div></div>
+  <div class="gradient">
+    <div class="background"></div>
+  </div>
   <div id="body">
     <ion-toolbar id="toolbar">
       <ion-searchbar
@@ -17,11 +25,16 @@
           (click)="irARecetaDelDia()"
         >
           <ion-icon slot="end" name="color-fill-outline"></ion-icon>
-          Arma tu menú
+          Arma tu receta
         </ion-button>
       </ion-header>
     </div>
-    <ion-button size="small" color="custom-color" id="compartebtn">
+    <ion-button 
+      size="small" 
+      color="custom-color" 
+      id="compartebtn"
+      (click)="irAShare()"
+    >
       <ion-icon slot="end" name="share"></ion-icon>
       Comparte tu receta
     </ion-button>
@@ -42,3 +55,4 @@
     </ion-card>
   </div>
 </ion-content>
+

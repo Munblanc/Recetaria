@@ -15,7 +15,7 @@ ion-content {
 .register-container {
   max-width: 100%;   
   width: 400px;   
-  margin: 130px auto;  
+  margin: 150px auto;  
   padding: 20px;   
   border-radius: 12px; 
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 2); 
@@ -65,20 +65,20 @@ ion-label, ion-input {
   border-color: red; 
 }
 
-ion-content::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 10px;
-  left: 50%; 
-  transform: translateX(-50%); 
-  width: 160px; 
-  height: 140px; 
-  background-image: url('/assets/icon/icono_receta.png'); 
-  background-size: contain; 
-  background-repeat: no-repeat; 
-  background-position: center; 
-  z-index: 2; 
+.icon-container {
+  position: absolute; /* Usa fixed para mantener el icono en su lugar durante el scroll */
+  top: 10px; /* Ajusta la distancia desde la parte superior */
+  left: 50%; /* Posiciona el contenedor a la mitad horizontal */
+  transform: translateX(-50%); /* Centra el icono horizontalmente */
+  z-index: 9999; /* Asegúrate de que esté por encima de otros elementos */
+  display: flex; /* Usa flexbox para centrar el icono dentro del contenedor */
+  justify-content: center; /* Centra el icono horizontalmente */
+  align-items: center; /* Centra el icono verticalmente */
+}
+
+.icon-container img {
+  width: 160px; /* Ajusta el tamaño según sea necesario */
+  height: auto; /* Mantiene la proporción del icono */
 }
 
 ion-button{
@@ -89,10 +89,7 @@ ion-button{
 h1,p{
     color: #000000;
 }
-ion-content {
-    --background: #ffffff; /* Fondo blanco para el contenido */
-  }
-  
+
   ion-item {
     position: relative; /* Establece posición relativa para los elementos hijos absolutos */
     margin-bottom: 16px;

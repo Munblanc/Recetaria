@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage {
+  selectedOption: string = 'listas'; // La opción por defecto es "Mis Listas"
 
-  constructor() { }
-
-  ngOnInit() {
+  selectOption(option: string) {
+    this.selectedOption = option;
   }
-
 }

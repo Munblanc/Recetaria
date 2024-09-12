@@ -15,19 +15,16 @@ export class LoginPage {
 
   onLogin() {
     if (this.authService.login(this.email, this.password)) {
-      this.navCtrl.navigateForward('/home');
+      this.navCtrl.navigateRoot('/tabs/home');
     } else {
       alert('Credenciales incorrectas');
     }
   }
 
-
   continueWithGoogle() {
-    // Lógica para continuar con Google
   }
 
   continueWithApple() {
-    // Lógica para continuar con Apple
   }
   
   navToRegister() {

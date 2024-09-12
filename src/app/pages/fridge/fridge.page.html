@@ -5,25 +5,34 @@
 </ion-header>
 
 <ion-content class="ion-padding" [fullscreen]="true">
-  <form>
+  <!-- Texto explicativo -->
+  <ion-card>
+    <ion-card-content>
+      <h1>¡Descubre lo que tienes en tu nevera y deja que tu creatividad culinaria fluya! </h1>
+      <p>Tu refrigerador está lleno de ingredientes que pueden convertirse en comidas deliciosas. 
+      Registra los ingredientes que tienes a mano y busca nuevas recetas que puedes preparar con ellos. 
+      ¡Haz que cada ingrediente cuente y sorprende a todos con tus habilidades en la cocina!</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Formulario -->
+  <form (ngSubmit)="searchRecipe()">
     <ion-list-header>
-      <ion-label>Ingredientes</ion-label>
-      <ion-button fill="clear" size="small">
+      <ion-label>Ingredientes :</ion-label>
+      <ion-button fill="clear" size="small" (click)="addIngredient()">
         <ion-icon name="add" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-list-header>
 
     <ion-list>
-      <ion-item>
-        <ion-input [name]="'ingredient'" placeholder="Ingrediente"></ion-input>
-        <ion-button fill="clear" slot="end">
+      <ion-item *ngFor="let ingredient of ingredients; let i = index">
+        <ion-input [(ngModel)]="ingredients[i]" placeholder="Ingrediente"></ion-input>
+        <ion-button fill="clear" slot="end" (click)="removeIngredient(i)">
           <ion-icon name="trash" slot="icon-only"></ion-icon>
         </ion-button>
       </ion-item>
     </ion-list>
 
-
-    <ion-button expand="block" type="submit">Guardar</ion-button>
+    <ion-button expand="block" type="submit">Buscar receta</ion-button>
   </form>
 </ion-content>
-
