@@ -10,94 +10,87 @@
   </div>
   <div class="register-container">
     <div class="header-text">
-
       <h1>Únete a RecetarIA</h1>
       <p>Miles de recetas para realizar en tu hogar...</p>
-
     </div>
-    <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <ion-item class="username-item">
+        <ion-label position="floating">Nombre de Usuario</ion-label>
+        <ion-input 
+          type="text" 
+          formControlName="nombre" 
+          required
+        ></ion-input>
+        <div *ngIf="registerForm.get('nombre')?.errors?.['required'] && registerForm.get('nombre')?.touched" class="error-message">
+          Nombre de usuario es requerido
+        </div>
+        <div *ngIf="registerForm.get('nombre')?.errors?.['minlength'] && registerForm.get('nombre')?.touched" class="error-message">
+          El nombre de usuario debe tener al menos 8 caracteres y un número
+        </div>
+      </ion-item>
+
       <ion-item class="email-item">
         <ion-label position="floating">Correo Electrónico</ion-label>
-
         <ion-input 
           type="email" 
-          [(ngModel)]="email" 
-          name="email" 
-
+          formControlName="email" 
           required
-          #emailInput="ngModel"
-          [class.invalid]="emailInput.invalid && emailInput.touched"
         ></ion-input>
-
-        <div *ngIf="emailInput.errors?.['required'] && emailInput.touched" class="error-message">
+        <div *ngIf="registerForm.get('email')?.errors?.['required'] && registerForm.get('email')?.touched" class="error-message">
           Correo electrónico es requerido
         </div>
-        <div *ngIf="emailInput.errors?.['email'] && emailInput.touched" class="error-message">
-
+        <div *ngIf="registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched" class="error-message">
           Correo electrónico no válido
         </div>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
-
         <ion-input 
           type="password" 
-          [(ngModel)]="password" 
-          name="password" 
-
+          formControlName="password" 
           required
-          #passwordInput="ngModel"
-          [class.invalid]="passwordInput.invalid && passwordInput.touched"
         ></ion-input>
-
-        <div *ngIf="passwordInput.errors?.['required'] && passwordInput.touched" class="error-message">
-
+        <div *ngIf="registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched" class="error-message">
           Contraseña es requerida
+        </div>
+        <div *ngIf="registerForm.get('password')?.errors?.['minlength'] && registerForm.get('password')?.touched" class="error-message">
+          La contraseña debe tener al menos 6 caracteres
         </div>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Confirmar Contraseña</ion-label>
-
         <ion-input 
           type="password" 
-          [(ngModel)]="confirmPassword" 
-          name="confirmPassword" 
-
+          formControlName="confirmPassword" 
           required
-          #confirmPasswordInput="ngModel"
-          [class.invalid]="confirmPasswordInput.invalid && confirmPasswordInput.touched"
         ></ion-input>
-
-        <div *ngIf="confirmPasswordInput.errors?.['required'] && confirmPasswordInput.touched" class="error-message">
+        <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required'] && registerForm.get('confirmPassword')?.touched" class="error-message">
           Confirmar contraseña es requerida
         </div>
-        <div *ngIf="password !== confirmPassword && confirmPasswordInput.touched" class="error-message">
-
+        <div *ngIf="registerForm.errors && registerForm.errors['mismatch'] && registerForm.get('confirmPassword')?.touched" class="error-message">
           Las contraseñas no coinciden
         </div>
       </ion-item>
-
-
+      <div *ngIf="errorMessage" class="error-message" color="danger">
+        {{ errorMessage }}
+      </div>
       <ion-button 
-        expand="full" 
-        type="submit" 
-
-        [disabled]="registerForm.invalid || password !== confirmPassword"
-      >
-        Registrar
+      type="submit"
+      expand="full"
+      [disabled]="!registerForm.valid"> 
+        Registrarse
       </ion-button>
     </form>
 
-    <!-- Botón para volver al login -->
 
+    <!-- Botón para volver al login -->
     <ion-button 
       expand="full" 
       fill="outline" 
       (click)="goToLogin()"
     >
-
       Volver
     </ion-button>
   </div>

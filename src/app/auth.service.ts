@@ -1,35 +1,68 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs'; // Import Observable
+import { map } from 'rxjs/operators'; // Import map
+import firebase from 'firebase/compat/app'; // Import firebase
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private users = new Map<string, string>(); // Simula una base de datos de usuarios
-  private isAuthenticatedStatus = false;
+  constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
-  constructor() {}
 
-  register(email: string, password: string): boolean {
-    if (this.users.has(email)) {
-      return false; // Usuario ya registrado
-    }
-    this.users.set(email, password);
-    return true;
+  register(data: { nombre: string; email: string; password: string }): Promise<any> {
+    return this.afAuth.createUserWithEmailAndPassword(data.email, data.password)
+      .then((userCredential) => {
+        // Puedes agregar más lógica aquí si lo deseas
+      })
+      .catch((error) => {
+        throw error; // Re-lanzar el error para manejarlo en el componente
+      });
   }
 
-  login(email: string, password: string): boolean {
-    if (this.users.get(email) === password) {
-      this.isAuthenticatedStatus = true;
-      return true;
-    }
-    return false;
+  login(email: string, password: string): Promise<any> {
+    return this.afAuth.signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        console.log('Usuario logueado', result);
+        this.router.navigate(['/tabs/home']);
+        return result; // Devuelve el resultado del login
+      })
+      .catch((error) => {
+        console.log('Error al loguear', error);
+        throw error; // Lanza el error para manejarlo en el componente
+      });
   }
+  
 
-  logout(): void {
-    this.isAuthenticatedStatus = false;
-  }
+logout(): Promise<any> {
+  return this.afAuth.signOut()
+  .then(() => {
+    console.log('Usuario deslogueado');
+    this.router.navigate(['/login']);
+  })
+  .catch((error) => {
+    console.log('Error al desloguear', error);
+  });
+}
 
-  isAuthenticated(): boolean {
-    return this.isAuthenticatedStatus;
-  }
+isLoggedIn(): Observable<boolean> {
+  return this.afAuth.authState.pipe(
+    map((user: firebase.User | null) => !!user));
+}
+getCurrentUser(): Promise<any> {
+  return this.afAuth.currentUser;
+}
+
+resetPassword(email: string): Promise<void> {
+  return this.afAuth.sendPasswordResetEmail(email)
+  .then(() => {
+    console.log('Email de recuperación enviado');
+  })
+  .catch((error) => {
+    console.log('Error al enviar email de recuperación', error);
+  });
+}
 }
