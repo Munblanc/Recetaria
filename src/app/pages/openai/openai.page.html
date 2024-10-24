@@ -1,0 +1,31 @@
+<ion-content>
+  <div class="background"></div>
+  <ion-header>
+    <ion-toolbar id="toolbar">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title id="header1">Sugerencias de Recetas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="recipes.length > 0" class="recipe-container">
+    <h2>Opciones de Recetas:</h2>
+    <div *ngFor="let recipe of recipes">
+      <p>{{ recipe }}</p>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <ion-item>
+      <ion-label position="floating"></ion-label>
+      <ion-input
+        [(ngModel)]="ingredients"
+        placeholder="Ingresa tus Ingredientes aquí:"
+        style="--background: transparent; --placeholder-opacity: 0.6;"
+      ></ion-input>
+    </ion-item>
+  </div>
+
+  <ion-button expand="full" (click)="getRecipes()">Obtener Recetas</ion-button>
+</ion-content>

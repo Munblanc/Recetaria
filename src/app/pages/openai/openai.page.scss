@@ -1,0 +1,62 @@
+ion-content {
+    --background: #f7f7f7; /* Color de fondo para todo el contenido */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espacia los elementos en la dirección vertical */
+    align-items: center; /* Centra los elementos en el eje horizontal */
+    padding: 16px; /* Espaciado interno */
+    height: 100%; /* Asegura que el contenido ocupe todo el alto disponible */
+  }
+  
+  #toolbar {
+    background-color: #ffffff; /* Color de fondo del toolbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidad */
+  }
+  
+  .input-container {
+    width: 100%; /* Ancho completo */
+    margin-top: 20px; /* Espacio superior */
+  }
+  
+  ion-item {
+    --background: #ffffff; /* Color de fondo del item */
+    --border-radius: 20px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  }
+  
+  ion-input {
+    --padding-start: 12px; /* Espaciado interno a la izquierda */
+    --padding-end: 12px; /* Espaciado interno a la derecha */
+    --color: #333333; /* Color del texto */
+  }
+  
+  ion-button {
+    margin-top: 10px; /* Espacio superior para separar el botón del campo */
+    --background: #757575; /* Color de fondo del botón */
+    --color: #ffffff; /* Color del texto del botón */
+    --border-radius: 20px; /* Bordes redondeados */
+  } 
+
+  ion-back-button{
+    color: white;
+  }
+  .recipe-container {
+    margin-top: 20px; /* Espacio superior */
+    padding: 16px; /* Espaciado interno */
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    width: 100%; /* Ancho completo */
+  }
+  
+  h2 {
+    margin: 0; /* Elimina margen */
+    color: #000000; /* Color del encabezado */
+  }
+  
+  p {
+    color: #555555; /* Color del texto */
+    margin-top: 8px; /* Espacio superior entre párrafos */
+    line-height: 1.5; /* Mejora la legibilidad con interlineado */
+  }
+  

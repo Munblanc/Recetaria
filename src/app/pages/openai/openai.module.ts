@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RecetadeldiaPageRoutingModule } from './recetadeldia-routing.module';
+import { OpenaiPageRoutingModule } from './openai-routing.module';
 
-import { RecetadeldiaPage } from './recetadeldia.page';
+import { OpenaiPage } from './openai.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RecetadeldiaPageRoutingModule
+    OpenaiPageRoutingModule
   ],
-  declarations: [RecetadeldiaPage]
+  declarations: [OpenaiPage]
 })
-export class RecetadeldiaPageModule {}
+export class OpenaiPageModule {}

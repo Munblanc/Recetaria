@@ -9,42 +9,44 @@
     <img src="/assets/icon/icono_receta.png" alt="Icono de Receta" />
   </div>
   <div class="login-container">
+    <!-- Mensaje de retroalimentación -->
+    <div *ngIf="feedbackMessage" class="feedback-container">
+      <div class="feedback-message">{{ feedbackMessage }}</div>
+    </div>
+    
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <ion-item>
         <ion-label position="floating">Correo Electrónico</ion-label>
         <ion-input type="email" formControlName="email" required></ion-input>
-      
-      <ion-note *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" color="danger">
-        Por favor, ingresa un correo electrónico válido.
-      </ion-note>
-    </ion-item>
+        <ion-note *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" color="danger">
+          Por favor, ingresa un correo electrónico válido.
+        </ion-note>
+      </ion-item>
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
         <ion-input type="password" formControlName="password" required></ion-input>
-      
-      <ion-note *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" color="danger">
-        Por favor, ingresa una contraseña válida.
-      </ion-note>
-    </ion-item>
-    <div *ngIf="showGeneralError" class="error-message" color="danger">
-      Por favor, completa todos los campos requeridos o verifica tus credenciales.
-    </div>
+        <ion-note *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" color="danger">
+          Por favor, ingresa una contraseña válida.
+        </ion-note>
+      </ion-item>
+      <div *ngIf="showGeneralError" class="error-message" color="danger">
+        Por favor, completa todos los campos requeridos o verifica tus credenciales.
+      </div>
       <ion-button expand="full" type="submit">Iniciar Sesión</ion-button>
-
+      
       <!-- Nuevo botón para continuar con Google -->
       <ion-button expand="full" color="light" (click)="continueWithGoogle()">
         Continuar con Google
         <ion-icon name="logo-google" slot="start"></ion-icon>
       </ion-button>
-
-      <ion-button expand="full" color="light" (click)="continueWithApple()">
-        <ion-icon name="logo-apple" slot="start"></ion-icon>
-        Continuar con Apple
-      </ion-button>
       
       <ion-item>
         <ion-label>¿No tienes una cuenta?</ion-label>
         <ion-button (click)="goToRegister()">Registrarse</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>¿Has olvidado tu contraseña?</ion-label>
+        <ion-button (click)="resetPassword()">Recuperar contraseña</ion-button>
       </ion-item>
     </form>
   </div>

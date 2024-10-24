@@ -10,8 +10,8 @@ export class HomePage {
 
   constructor(private navCtrl: NavController) {}
 
-  irARecetaDelDia() {
-    this.navCtrl.navigateForward('/tabs/home/recetadeldia');
+  irAOpenAI() {
+    this.navCtrl.navigateForward('/openai'); // Asegúrate de que esta ruta esté definida en tu enrutamiento
   }
 
   irAShare() {

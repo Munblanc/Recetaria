@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private navCtrl: NavController,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router 
   ) {}
 
   ngOnInit() {
@@ -24,12 +26,12 @@ export class RegisterPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
-    }, { validators: this.passwordsMatch }); // Se mueve el validador aquí
+    }, { validators: this.passwordsMatch }); 
   }
 
   containsNumber(control: any) {
-    const hasNumber = /\d/.test(control.value);  // Verifica si hay un número
-    return hasNumber ? null : { noNumber: true };  // Retorna error si no hay número
+    const hasNumber = /\d/.test(control.value); 
+    return hasNumber ? null : { noNumber: true };  
   }
 
   passwordsMatch(formGroup: FormGroup) {
@@ -45,8 +47,10 @@ export class RegisterPage implements OnInit {
       this.authService.register({ nombre, email, password })
         .then(result => {
           console.log('Usuario registrado', result);
-          // Redirigir o hacer lo que necesites después del registro
-          this.errorMessage = ''; // Limpiar el mensaje de error
+          this.errorMessage = '';
+          
+          // Redirigir al usuario a la página de login después de un registro exitoso
+          this.router.navigate(['/login']);
         })
         .catch(error => {
           console.error('Error al registrar', error);
@@ -60,6 +64,7 @@ export class RegisterPage implements OnInit {
       this.errorMessage = 'Por favor, completa todos los campos requeridos.';
     }
   }
+  
   
 
   goToLogin() {

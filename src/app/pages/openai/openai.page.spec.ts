@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RecetadeldiaPage } from './recetadeldia.page';
+import { OpenaiPage } from './openai.page';
 
-describe('RecetadeldiaPage', () => {
-  let component: RecetadeldiaPage;
-  let fixture: ComponentFixture<RecetadeldiaPage>;
+describe('OpenaiPage', () => {
+  let component: OpenaiPage;
+  let fixture: ComponentFixture<OpenaiPage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecetadeldiaPage);
+    fixture = TestBed.createComponent(OpenaiPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

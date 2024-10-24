@@ -18,7 +18,11 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule)
+  },  {
+    path: 'openai',
+    loadChildren: () => import('./pages/openai/openai.module').then( m => m.OpenaiPageModule)
   }
+
 ];
 
 @NgModule({
