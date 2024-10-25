@@ -8,21 +8,16 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content padding>
   <div class="profile-container">
-    <!-- Icono de perfil -->
-    <div class="profile-icon">
-      <ion-icon name="person-circle" size="large" class="large-profile-icon"></ion-icon>
-      <div class="upload-photo">
-        <ion-icon name="camera" size="small"></ion-icon>
-        <input type="file" id="photo-upload" accept="image/*">
-      </div>
+    <div class="profile-icon" [ngStyle]="{ 'background-image': 'url(' + base64Image + ')' }">
+      <canvas #canvasElement style="display: none;"></canvas>
     </div>
+    <app-image-uploader (imageSelected)="onImageSelected($event)"></app-image-uploader>
     <div class="nombre">
-      <h1>Maximiliano Navarrete</h1>
+      <h1 *ngIf="userProfile">{{ userProfile.nombre }}</h1>
+      <p *ngIf="userProfile">{{ userProfile.email }}</p>
     </div>
-    <!-- Opciones de listas y recetas en el mismo cuadro -->
     <div class="list-recipe-box">
       <div class="options">
         <button ion-button expand="full" class="option-button" [class.selected]="selectedOption === 'listas'" (click)="selectOption('listas')">Mis Listas</button>
@@ -30,14 +25,10 @@
       </div>
       <div class="underline" [ngClass]="{ 'listas': selectedOption === 'listas', 'recetas': selectedOption === 'recetas' }"></div>
     </div>
-
-    <!-- Crear una lista nueva con ícono -->
     <ion-button expand="full" fill="clear" class="create-list-button">
       Crear una Lista Nueva
       <ion-icon name="add-circle-outline" slot="start"></ion-icon>
     </ion-button>
-
-    <!-- Mis favoritos -->
-    <ion-button expand="full" fill="clear" class="favorites-button">Mis Favoritos</ion-button>
+    <ion-button expand="full" fill="clear" class="favorites-button">Mis Favoritos</ion-button> 
   </div>
 </ion-content>

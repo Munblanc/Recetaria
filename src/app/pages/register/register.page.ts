@@ -45,28 +45,23 @@ export class RegisterPage implements OnInit {
     if (this.registerForm.valid) {
       const { nombre, email, password } = this.registerForm.value;
       this.authService.register({ nombre, email, password })
-        .then(result => {
-          console.log('Usuario registrado', result);
+        .then(() => {
+          console.log('Usuario registrado');
           this.errorMessage = '';
           
-          // Redirigir al usuario a la página de login después de un registro exitoso
-          this.router.navigate(['/login']);
+          // Redirige al login usando NavController
+          this.navCtrl.navigateRoot('/login');
         })
         .catch(error => {
           console.error('Error al registrar', error);
-          if (error.code === 'auth/email-already-in-use') {
-            this.errorMessage = 'Este correo ya está en uso. Por favor, elige otro.';
-          } else {
-            this.errorMessage = 'Ocurrió un error al registrarte. Intenta nuevamente.';
-          }
+          this.errorMessage = error.code === 'auth/email-already-in-use' 
+            ? 'Este correo ya está en uso. Por favor, elige otro.' 
+            : 'Ocurrió un error al registrarte. Intenta nuevamente.';
         });
     } else {
       this.errorMessage = 'Por favor, completa todos los campos requeridos.';
     }
   }
-  
-  
-
   goToLogin() {
     this.navCtrl.navigateBack('/login');
   }

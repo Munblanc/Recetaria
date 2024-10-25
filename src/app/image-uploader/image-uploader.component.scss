@@ -1,0 +1,15 @@
+ion-button {
+    --background: #3880ff;
+    --color: white;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los botones horizontalmente */
+    width: 100%; /* Ajusta el ancho al contenedor */
+    gap: 10px; /* Espacio entre los botones */
+  }

@@ -1,0 +1,7 @@
+<div *ngIf="!isCameraActive">
+  <ion-button (click)="openCamera()">Cambiar foto</ion-button>
+</div>
+
+<video *ngIf="isCameraActive" #videoElement style="display: block; width: 100%;"></video>
+<canvas #canvasElement style="display: none;"></canvas>
+<ion-button *ngIf="isCameraActive" (click)="takePicture()" style="margin-top: 10px;">Aceptar</ion-button>

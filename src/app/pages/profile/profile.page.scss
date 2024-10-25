@@ -36,18 +36,15 @@ ion-icon[name="settings-outline"] {
 }
 
 .profile-icon {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  width: 200px;
+  width: 200px;  /* Cambia el tamaño según tus necesidades */
   height: 200px;
+  border-radius: 50%;  /* Hace que el fondo sea circular */
+  background-size: cover;
+  background-position: center;
+  background-color: #f3f3f3; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px; /* Color de fondo si no hay imagen */
 }
-
 .profile-icon ion-icon {
   font-size: 180px;
   color: #000000;

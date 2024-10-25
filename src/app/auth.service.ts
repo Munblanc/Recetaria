@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs'; // Import Observable
-import { map } from 'rxjs/operators'; // Import map
-import firebase from 'firebase/compat/app'; // Import firebase
+import { Observable } from 'rxjs'; 
+import { map } from 'rxjs/operators'; 
+import firebase from 'firebase/compat/app'; 
 
 
 @Injectable({
@@ -16,23 +16,32 @@ export class AuthService {
   register(data: { nombre: string; email: string; password: string }): Promise<any> {
     return this.afAuth.createUserWithEmailAndPassword(data.email, data.password)
       .then((userCredential) => {
-        // Puedes agregar más lógica aquí si lo deseas
+        const user = userCredential.user;
+        return user?.updateProfile({
+          displayName: data.nombre // Actualiza el nombre en el perfil
+        }).then(() => {
+          return {
+            uid: user.uid,
+            email: user.email,
+            nombre: data.nombre
+          };
+        });
       })
       .catch((error) => {
-        throw error; // Re-lanzar el error para manejarlo en el componente
+        throw error; 
       });
-  }
+}
 
   login(email: string, password: string): Promise<any> {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         console.log('Usuario logueado', result);
         this.router.navigate(['/tabs/home']);
-        return result; // Devuelve el resultado del login
+        return result; 
       })
       .catch((error) => {
         console.log('Error al loguear', error);
-        throw error; // Lanza el error para manejarlo en el componente
+        throw error;
       });
   }
   
@@ -56,6 +65,7 @@ getCurrentUser(): Promise<any> {
   return this.afAuth.currentUser;
 }
 
+
 resetPassword(email: string): Promise<void> {
   return this.afAuth.sendPasswordResetEmail(email)
   .then(() => {
@@ -65,4 +75,7 @@ resetPassword(email: string): Promise<void> {
     console.log('Error al enviar email de recuperación', error);
   });
 }
+
+
 }
+
