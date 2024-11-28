@@ -13,6 +13,6 @@ import { ImageUploaderComponent } from '../../image-uploader/image-uploader.comp
     IonicModule,
     ProfilePageRoutingModule
   ],
-  declarations: [ProfilePage,ImageUploaderComponent]
+  declarations: [ProfilePage,ImageUploaderComponent],
 })
 export class ProfilePageModule {}

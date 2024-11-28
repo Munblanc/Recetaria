@@ -1,75 +1,101 @@
 ion-content {
-    --background: #ffffff;
-  }
-  
-  ion-toolbar{
-    background-color: black;
-  }
+  --background: #fafafa; /* Fondo claro */
+  padding: 16px;
+}
 
-  form {
-    max-width: 100%;
-    width: 400px;
-    margin: 100px auto;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  ion-item {
-    --background: #ffffff;
-    --border-radius: 8px;
-    margin-bottom: 16px;
-    padding: 10px;
-    --color: #000000;
-    background-color: #ffffff;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-  }
-  
-  ion-list {
-    background-color: #ffffff;
-  }
-  
-  ion-label,
-  ion-input {
-    color: #000000; 
-  }
+ion-toolbar {
+  background-color: #ffffff; /* Blanco para el header */
+  --color: #333; /* Texto oscuro */
+  border-bottom: 1px solid #ddd; /* Línea sutil en la parte inferior */
+}
 
-  ion-button {
-    --background: #7b6b4e;
-    color: #ffffff;
-    margin-top: 20px;
-  }
-  
-  ion-button[fill="clear"] {
-    --color: #7b6b4e;
-  }
-  
-  form {
-    margin: 100px auto;
-  }
-  
-  h1{
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center;
-    color: #484848;
-  }
+ion-back-button {
+  color: #333; /* Color de texto oscuro */
+}
 
-  p{
-    font-size: 1em;
-    line-height: 1.5;
-    color: #ffffff;
-    text-align: justify;
-  }
+h1, h2 {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin: 0;
+}
 
-   ion-card{
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 10px;
-    border-radius: 12px;
-    background-color: #adadad;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: -40px;
-  }
+p {
+  font-size: 1em;
+  color: #666; /* Gris oscuro */
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Estilo para el texto introductorio */
+.intro-text {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 1em;
+  color: #666;
+}
+
+/* Estilo para las recetas guardadas */
+.recipe-list {
+  margin-top: 20px;
+}
+
+ion-item {
+  background-color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 1em;
+  color: #333;
+  border: 1px solid #e0e0e0; /* Borde sutil */
+}
+
+ion-item .recipe-name {
+  font-weight: 500;
+}
+
+/* Botón de eliminar */
+ion-button {
+  --background: transparent; /* Botón sin fondo */
+  --color: #e74c3c; /* Rojo para eliminar */
+  font-weight: normal;
+  padding: 0 8px;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+ion-button:focus {
+  outline: none; /* Eliminar el contorno al hacer clic */
+}
+
+.no-recipes {
+  text-align: center;
+  font-size: 1.1em;
+  color: #999;
+  margin-top: 20px;
+}
+
+/* Botón "Buscar receta" */
+.ask-ai-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.ask-ai-container ion-button {
+  --background: transparent;
+  --color: #007bff; /* Azul */
+  --border-radius: 50px;
+  border: 1px solid #007bff;
+  padding: 10px 0;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.ask-ai-container ion-button:hover {
+  --color: #0056b3; /* Azul más oscuro al pasar el mouse */
+  border: 1px solid #0056b3;
+}

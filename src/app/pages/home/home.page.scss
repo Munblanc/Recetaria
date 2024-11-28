@@ -1,12 +1,11 @@
-#body{
-    display:flex;
-    align-items:center;
+#body {
+    display: flex;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
-
 }
 
-.background{
+.background {
     background-image: url('https://i.blogs.es/6f44f2/1366_2000-7-/1366_2000.jpg');
     background-size: cover;
     background-position: center;
@@ -20,8 +19,9 @@
     z-index: -1; 
     opacity: 0.8;
     transition: filter 0.5s ease-in-out;
-  }
-  .background::before {
+}
+
+.background::before {
     content: "";
     position: absolute;
     top: 0;
@@ -33,43 +33,27 @@
     pointer-events: none;
 }
 
-#cartamenu{
-    margin-top: 80px
-    height 100%;
-}       
-
-#armabtn{
-    color:#000000;
-    background-color: #fffffff5;  
-    border-radius: 30px;
-    margin-top: 20px;
-    box-shadow: 0 5px 10px rgba(0,0,0);
-    border: 1px,solid,black;
+#cartamenu {
+    margin-top: 80px;
     height: 100%;
     width: 100%;
-    height: 30px;
-    width: 200px;
-    display:flex;
-    align-items: center;
-    justify-content: center;
 }
-#compartebtn{
-    color:#000000;
-    background-color: #fffffff5;  
+
+#armabtn, #compartebtn {
+    color: #000000;
+    background-color: #fffffff5;
     border-radius: 30px;
     margin-top: 20px;
     box-shadow: 0 5px 10px rgba(0,0,0);
-    border: 1px,solid,black;
-    height: 100%;
-    width: 100%;
+    border: 1px solid black;
     height: 30px;
     width: 200px;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#crearbtn{
+#crearbtn {
     color: #9c9c9c;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -77,28 +61,77 @@
     border-radius: 30px;
     transition: background-color 0.5s ease-in-out;
     box-shadow: 0 5px 10px rgba(0,0,0);
-    border: 1px,solid,black;
+    border: 1px solid black;
     height: 40%;
-    width: 20%;  
+    width: 20%;
 }
 
-#toolbar{
+#toolbar {
     border-radius: 10px;
     min-width: 10px;
     width: 80%;
     margin-top: 5px;
     box-shadow: 0 5px 10px rgba(0,0,0);
-    border: 1px,solid,black;
+    border: 1px solid black;
     align-items: center;
     justify-content: center;
     display: flex;
 }
 
-#searchbar{
+#searchbar {
     color: #dddddd;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
 }
 
+/* Estilo para las tarjetas */
+ion-card {
+    color: white; /* Esto hace que todo el texto dentro sea blanco */
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo translúcido para contraste */
+    border-radius: 15px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+ion-card-tittle{
+    color: white;
+}
+
+ion-card ion-card-header,
+ion-card ion-card-content {
+    color: white; /* Asegura que los textos en headers y contenidos sean blancos */
+}
+
+/* Carrusel */
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 20px;
+}
+
+.carousel ion-card {
+    min-width: 250px;
+    max-width: 300px;
+    flex: 0 0 auto;
+    transition: transform 0.3s ease;
+}
+
+.carousel ion-card:hover {
+    transform: scale(1.05);
+}
+
+.carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+    background: #AD4141;
+    border-radius: 10px;
+}
+
+.carousel::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}

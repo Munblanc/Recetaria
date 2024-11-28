@@ -1,5 +1,6 @@
 <ion-content>
   <div class="background"></div>
+
   <ion-header>
     <ion-toolbar id="toolbar">
       <ion-buttons slot="start">
@@ -9,23 +10,45 @@
     </ion-toolbar>
   </ion-header>
 
-  <div *ngIf="recipes.length > 0" class="recipe-container">
-    <h2>Opciones de Recetas:</h2>
-    <div *ngFor="let recipe of recipes">
-      <p>{{ recipe }}</p>
-    </div>
+  <!-- Mostrar receta obtenida -->
+  <div *ngIf="recipe && !isRecipeSaved" class="recipe-container">
+    <h2>Receta Generada:</h2>
+    <p>{{ recipe }}</p>
+
+    <!-- Botón para guardar la receta -->
+    <ion-button expand="full" (click)="saveRecipe()">
+      Guardar Receta
+    </ion-button>
   </div>
 
+  <!-- Mostrar mensaje cuando no haya receta -->
+  <div *ngIf="!recipe && !loading && !isRecipeSaved" class="no-recipes">
+    <p>No se han encontrado recetas. Ingresa los ingredientes para obtener sugerencias.</p>
+  </div>
+
+  <!-- Campo de entrada de ingredientes -->
   <div class="input-container">
     <ion-item>
-      <ion-label position="floating"></ion-label>
+      <ion-label position="floating">Ingredientes</ion-label>
       <ion-input
         [(ngModel)]="ingredients"
-        placeholder="Ingresa tus Ingredientes aquí:"
+        placeholder="Ingresa tus ingredientes aquí:"
         style="--background: transparent; --placeholder-opacity: 0.6;"
       ></ion-input>
     </ion-item>
   </div>
 
-  <ion-button expand="full" (click)="getRecipes()">Obtener Recetas</ion-button>
+  <!-- Botón para obtener receta -->
+  <ion-button expand="full" (click)="getRecipes()" [disabled]="!canGetRecipes()">
+    <ion-icon slot="start" name="search-outline"></ion-icon>
+    Obtener Recetas
+  </ion-button>
+
+  <!-- Indicador de carga mientras se obtiene receta -->
+  <ion-spinner *ngIf="loading" name="crescent" class="loading-spinner"></ion-spinner>
+
+  <!-- Botón para reiniciar búsqueda de recetas -->
+  <ion-button expand="full" fill="clear" *ngIf="recipe && !isRecipeSaved" (click)="resetSearch()">
+    Buscar otra receta
+  </ion-button>
 </ion-content>

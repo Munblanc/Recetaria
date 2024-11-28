@@ -1,38 +1,47 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Qué hay en tu refri?</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Recetas Guardadas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" [fullscreen]="true">
-  <!-- Texto explicativo -->
-  <ion-card>
-    <ion-card-content>
-      <h1>¡Descubre lo que tienes en tu nevera y deja que tu creatividad culinaria fluya! </h1>
-      <p>Tu refrigerador está lleno de ingredientes que pueden convertirse en comidas deliciosas. 
-      Registra los ingredientes que tienes a mano y busca nuevas recetas que puedes preparar con ellos. 
-      ¡Haz que cada ingrediente cuente y sorprende a todos con tus habilidades en la cocina!</p>
-    </ion-card-content>
-  </ion-card>
+<ion-content>
+  <!-- Texto introductorio para la página -->
+  <div class="intro-text">
+    <p>
+      Bienvenido a tu espacio de recetas guardadas. Aquí puedes ver todas las recetas que has almacenado. 
+      Si encuentras alguna receta que ya no necesitas, puedes eliminarla con facilidad. ¡Empieza a explorar!
+    </p>
+  </div>
 
-  <!-- Formulario -->
-  <form (ngSubmit)="searchRecipe()">
-    <ion-list-header>
-      <ion-label>Ingredientes :</ion-label>
-      <ion-button fill="clear" size="small" (click)="addIngredient()">
-        <ion-icon name="add" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-list-header>
+  <!-- Mostrar indicador de carga mientras se cargan las recetas -->
+  <ion-spinner *ngIf="loading" name="crescent" class="loading-spinner"></ion-spinner>
 
-    <ion-list>
-      <ion-item *ngFor="let ingredient of ingredients; let i = index">
-        <ion-input [(ngModel)]="ingredients[i]" placeholder="Ingrediente"></ion-input>
-        <ion-button fill="clear" slot="end" (click)="removeIngredient(i)">
-          <ion-icon name="trash" slot="icon-only"></ion-icon>
-        </ion-button>
+  <!-- Mostrar las recetas guardadas -->
+  <div *ngIf="recipes.length > 0">
+    <ion-list class="recipe-list">
+      <ion-item *ngFor="let recipe of recipes">
+        <ion-label class="recipe-name">{{ recipe.recipe }}</ion-label> <!-- Mostrar el nombre de la receta -->
+        <ion-buttons slot="end">
+          <ion-button color="danger" (click)="deleteRecipe(recipe.id)">
+            <ion-icon name="trash-outline"></ion-icon> Eliminar
+          </ion-button>
+        </ion-buttons>
       </ion-item>
     </ion-list>
+  </div>
 
-    <ion-button expand="block" type="submit">Buscar receta</ion-button>
-  </form>
+  <!-- Mostrar un mensaje si no hay recetas guardadas -->
+  <div *ngIf="recipes.length === 0 && !loading" class="no-recipes">
+    <p>No tienes recetas guardadas aún. ¡Guarda una receta!</p>
+  </div>
+
+  <!-- Contenedor para el texto y el botón alineados -->
+  <div class="ask-ai-container">
+    <ion-button expand="full" fill="clear" (click)="goToOpenAI()">
+      Buscar receta
+    </ion-button>
+  </div>
 </ion-content>

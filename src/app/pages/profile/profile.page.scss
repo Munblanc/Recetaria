@@ -1,17 +1,21 @@
+ion-tittle {
+  color: white;
+}
 ion-header {
   --background: #ffffff; /* Fondo blanco para el header */
   --color: #000000; /* Color del texto en el header */
 }
 
 ion-toolbar {
-  --background: #000000; /* Fondo blanco para el toolbar */
+  --background: #000000; /* Fondo negro para el toolbar */
 }
 
-h1{
+h1 {
   text-align: center;
   color: #000000;
   padding-bottom: 20px;
 }
+
 ion-buttons {
   display: flex;
   align-items: center;
@@ -26,128 +30,153 @@ ion-icon[name="settings-outline"] {
   color: #ffffff; /* Color del ícono */
 }
 
+/* Estilos del contenedor de perfil */
 .profile-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  background-color: #f4f4f4;
+  padding: 30px;
+  background-color: #f9f9f9;
   min-height: 100vh;
 }
 
+/* Estilos para la imagen de perfil */
 .profile-icon {
-  width: 200px;  /* Cambia el tamaño según tus necesidades */
-  height: 200px;
-  border-radius: 50%;  /* Hace que el fondo sea circular */
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-color: #e0e0e0;  /* Fondo gris cuando no hay imagen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;  /* Hace que la imagen no se desborde fuera del círculo */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);  /* Añade sombra para dar profundidad */
+  margin-bottom: 20px;
+}
+
+.profile-icon ion-icon {
+  font-size: 80px;  /* Ajusté el tamaño para que sea proporcional al círculo */
+  color: #000000;
+  position: absolute;
+  z-index: 1; /* Asegura que el icono esté encima de la imagen si no hay imagen */
+  opacity: 1;  /* Asegura que el ícono sea visible antes de cargar la imagen */
+}
+
+/* Estilos para la imagen de perfil cuando hay una imagen */
+.profile-icon[style*="background-image"] {
+  background-size: cover;        /* Hace que la imagen cubra todo el círculo */
+  background-position: center;   /* Centra la imagen dentro del círculo */
+  background-repeat: no-repeat;  /* Asegura que la imagen no se repita */
+}
+
+/* Ocultar el ícono solo cuando haya una imagen */
+.profile-icon[style*="background-image"] .profile-icon-icon {
+  display: none;  /* Oculta el ícono si hay imagen */
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
-  background-color: #f3f3f3; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px; /* Color de fondo si no hay imagen */
-}
-.profile-icon ion-icon {
-  font-size: 180px;
-  color: #000000;
-}
-
-.upload-photo {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background-color: #ffffff;
   border-radius: 50%;
-  border: 2px solid #000000;
-  padding: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
 }
 
-.upload-photo ion-icon {
-  color: #000000;
-}
-
-.upload-photo input {
-  display: none;
-}
-
-/* Caja para Mis Listas y Mis Recetas */
-.list-recipe-box {
-  background-color: #ffffff;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 90%;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.options {
-  display: flex;
-  justify-content: space-between;
-}
-
-.option-button {
-  flex: 1;
+/* Estilos del texto de la foto */
+.change-photo-text {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #757575;
   text-align: center;
-  border: none;
-  background: none;
-  font-size: 16px;
-  color: #3f3f3f;
-  padding: 10px;
-  position: relative;
-  transition: color 0.3s ease;
-  cursor: pointer;
+  font-weight: bold;
 }
 
-.option-button.selected {
-  color: #000000; /* Texto oscuro cuando está seleccionado */
-}
-
-.underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  background-color: #000000;
-  width: 50%;
-  transition: transform 0.3s ease;
-}
-
-.underline.listas {
-  transform: translateX(2%); /* Subrayado bajo "Mis Listas" */
-}
-
-.underline.recetas {
-  transform: translateX(97%); /* Subrayado bajo "Mis Recetas" */
-}
-
-.create-list-button {
+/* Descripción del perfil */
+.profile-description {
   margin-top: 20px;
-  width: 90%;
-  background-color: #ffffff; /* Fondo blanco */
-  color: #000000; /* Texto negro */
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: space-between; /* Espacio entre el texto y el ícono */
-  align-items: center;
-  padding: 10px;
-  padding-right: 80px;
-  font-size: 16px;
+  text-align: center;
+  color: #333;
 }
 
-/* Mis Favoritos */
-.favorites-button {
-  margin-top: 20px;
-  width: 90%;
-  background-color: #c7c7c7; /* Fondo gris claro */
-  color: #000000; /* Texto negro */
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: space-between; /* Espacio entre el texto y el ícono */
-  align-items: center;
-  padding: 10px;
-  padding-right: 165px;
+.profile-description h2 {
+  font-size: 20px;
+  color: #2c3e50;
+}
+
+.profile-description p {
   font-size: 16px;
+  color: #7f8c8d;
+}
+
+/* Barra de progreso */
+.progress-container {
+  margin-top: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.progress-bar {
+  margin-top: 10px;
+}
+
+/* Estadísticas del usuario */
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat h3 {
+  font-size: 18px;
+  color: #34495e;
+}
+
+.stat p {
+  font-size: 22px;
+  color: #3498db;
+}
+
+/* Enlaces de redes sociales */
+.social-media-links {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.social-media-links ion-icon {
+  font-size: 30px;
+  color: #3498db;
+}
+
+/* Estilos para el modal */
+ion-modal {
+  --background: #ffffff;
+}
+
+ion-item {
+  --min-height: 50px;
+}
+
+ion-button {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --border-radius: 12px;
+}
+
+ion-button[color="primary"] {
+  background-color: #3498db;
+  color: white;
+}
+
+/* Estilos del action sheet */
+ion-action-sheet {
+  --background: #f4f4f4;
 }

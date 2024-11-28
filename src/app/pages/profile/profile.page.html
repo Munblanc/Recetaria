@@ -2,33 +2,111 @@
   <ion-toolbar>
     <ion-title>Perfil</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="openModal()">
         <ion-icon name="settings-outline" class="settings-icon"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content padding>
   <div class="profile-container">
-    <div class="profile-icon" [ngStyle]="{ 'background-image': 'url(' + base64Image + ')' }">
+    <!-- Imagen de perfil -->
+    <div class="profile-icon" [ngStyle]="{ 'background-image': 'url(' + base64Image + ')' }" (click)="openImagePicker()">
+      <!-- Mostrar el ícono solo si no hay imagen seleccionada -->
+      <ion-icon *ngIf="!base64Image" name="person-circle" class="profile-icon-icon"></ion-icon>
       <canvas #canvasElement style="display: none;"></canvas>
     </div>
-    <app-image-uploader (imageSelected)="onImageSelected($event)"></app-image-uploader>
     <div class="nombre">
       <h1 *ngIf="userProfile">{{ userProfile.nombre }}</h1>
       <p *ngIf="userProfile">{{ userProfile.email }}</p>
     </div>
-    <div class="list-recipe-box">
-      <div class="options">
-        <button ion-button expand="full" class="option-button" [class.selected]="selectedOption === 'listas'" (click)="selectOption('listas')">Mis Listas</button>
-        <button ion-button expand="full" class="option-button" [class.selected]="selectedOption === 'recetas'" (click)="selectOption('recetas')">Mis Recetas</button>
-      </div>
-      <div class="underline" [ngClass]="{ 'listas': selectedOption === 'listas', 'recetas': selectedOption === 'recetas' }"></div>
+    
+    <div class="profile-description">
+      <h2>Bienvenido a tu perfil</h2>
+      <p>¡Aquí puedes personalizar tu foto y actualizar tu información para que todos te conozcan mejor!</p>
     </div>
-    <ion-button expand="full" fill="clear" class="create-list-button">
-      Crear una Lista Nueva
-      <ion-icon name="add-circle-outline" slot="start"></ion-icon>
-    </ion-button>
-    <ion-button expand="full" fill="clear" class="favorites-button">Mis Favoritos</ion-button> 
+
+    <!-- Barra de progreso (opcional) -->
+    <div class="progress-container">
+      <p>Progreso en recetas publicadas</p>
+      <ion-progress-bar value="0.6" color="primary" class="progress-bar"></ion-progress-bar>
+    </div>
+
+    <!-- Estadísticas del usuario -->
+    <div class="stats-container">
+      <div class="stat">
+        <h3>Recetas Publicadas</h3>
+        <p>12</p>
+      </div>
+      <div class="stat">
+        <h3>Seguidores</h3>
+        <p>350</p>
+      </div>
+      <div class="stat">
+        <h3>Favoritos</h3>
+        <p>58</p>
+      </div>
+    </div>
+    
+    <!-- Enlaces de redes sociales -->
+    <div class="social-media-links">
+      <ion-icon name="logo-facebook"></ion-icon>
+      <ion-icon name="logo-instagram"></ion-icon>
+      <ion-icon name="logo-twitter"></ion-icon>
+      <ion-icon name="logo-github"></ion-icon>
+    </div>
   </div>
 </ion-content>
+
+<!-- Modal para configuración -->
+<ion-modal [isOpen]="isModalOpen" (didDismiss)="onModalDismiss()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Configuración</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeModal()">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <!-- Opciones del menú -->
+        <ion-item button>
+          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          <ion-label>Editar perfil</ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-icon name="key-outline" slot="start"></ion-icon>
+          <ion-label>Cambiar contraseña</ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-icon name="notifications-outline" slot="start"></ion-icon>
+          <ion-label>Notificaciones</ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+          <ion-label>Acerca de</ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-icon name="help-circle-outline" slot="start"></ion-icon>
+          <ion-label>Ayuda</ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          <ion-label>Cerrar sesión</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- ActionSheet para seleccionar imagen -->
+<ion-action-sheet 
+  [isOpen]="isActionSheetOpen" 
+  (didDismiss)="isActionSheetOpen = false" 
+  [buttons]="actionSheetButtons">
+</ion-action-sheet>  

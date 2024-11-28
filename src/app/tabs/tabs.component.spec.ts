@@ -1,24 +1,21 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-
+import { TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { TabsComponent } from './tabs.component';
+import { of } from 'rxjs';
 
 describe('TabsComponent', () => {
-  let component: TabsComponent;
-  let fixture: ComponentFixture<TabsComponent>;
-
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ TabsComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(TabsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+      declarations: [TabsComponent],
+      providers: [
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: of({}) } } } // Mock de ActivatedRoute
+      ]
+    })
+  });
 
   it('should create', () => {
+    const fixture = TestBed.createComponent(TabsComponent);
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });

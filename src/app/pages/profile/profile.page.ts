@@ -1,8 +1,11 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
+import { MenuController, AlertController, ActionSheetController } from '@ionic/angular';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { getDatabase, ref, set } from 'firebase/database';
+import { Router } from '@angular/router';
+import { OpenaiService } from 'src/app/services/openai.service';
+import { ModalController } from '@ionic/angular';
+import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-profile',
@@ -10,129 +13,181 @@ import { getDatabase, ref, set } from 'firebase/database';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage {
-  userProfile: any;
-  selectedOption: string = 'listas'; // Opción por defecto
-  base64Image: string = '';
-  selectedImage: string | null = null; // Propiedad para almacenar la imagen seleccionada
+  userProfile: any; // Perfil del usuario
+  selectedOption: string = 'listas'; // Opción seleccionada
+  base64Image: string = ''; // Imagen de perfil
+  showSettings: boolean = false; // Para mostrar/ocultar configuración
+  isModalOpen = false; // Para mostrar/ocultar modal
+  isActionSheetOpen = false; // Para mostrar/ocultar ActionSheet
+  actionSheetButtons: any[] = []; // Botones del ActionSheet
 
   constructor(
+    public menu: MenuController,
     private authService: AuthService,
     private storage: AngularFireStorage,
-    private firestore: AngularFirestore,
+    private alertController: AlertController,
+    private router: Router,
+    private openaiService: OpenaiService,
+    private modalController: ModalController,
+    private camera: Camera,
+    private actionSheetController: ActionSheetController // Agregar ActionSheetController
   ) {
-    this.loadUserProfile();
+    this.loadUserProfile(); // Cargar datos del perfil al iniciar
   }
 
-  
-  
   ngOnInit() {
-    this.authService.getCurrentUser().then(user => {
-      if (user) {
-        this.userProfile = {
-          uid: user.uid,
-          email: user.email,
-          nombre: user.displayName || 'Sin nombre'
-        };
-      }
-    }).catch(error => {
-      console.error('Error al obtener el usuario', error);
-    });
-  }
-
-  loadUserProfile() {
-    this.authService.getCurrentUser().then(user => {
-      if (user) {
-        this.firestore.collection('users').doc(user.uid).valueChanges().subscribe(profile => {
-          this.userProfile = profile;
-        });
-      }
-    }).catch(error => {
-      console.error('Error al cargar el perfil', error);
-    });
-  }
-
-  selectOption(option: string) {
-    this.selectedOption = option; 
-  }
-
-  takePhoto() {
-    const videoElement = document.createElement('video');
-    const canvasElement = document.createElement('canvas');
-    const context = canvasElement.getContext('2d');
-  
-    // Asegúrate de que context no es null
-    if (!context) {
-      console.error('Error: No se pudo obtener el contexto del lienzo.');
-      return;
-    }
-  
-    // Acceder a la cámara
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then((stream) => {
-        videoElement.srcObject = stream;
-        videoElement.play();
-  
-        // Capturar la imagen después de 1 segundo (o más)
-        setTimeout(() => {
-          context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
-          const base64Image = canvasElement.toDataURL('image/png');
-          this.onImageSelected(base64Image); // Llama a onImageSelected para guardar la imagen
-          
-          // Detener el stream de video
-          stream.getTracks().forEach(track => track.stop());
-        }, 1000);
+    this.authService.getCurrentUser()
+      .then(user => {
+        if (user) {
+          this.userProfile = {
+            uid: user.uid,
+            email: user.email,
+            nombre: user.nombre || 'Sin nombre'
+          };
+        }
       })
-      .catch((error) => {
-        console.error('Error al acceder a la cámara:', error);
+      .catch(error => {
+        console.error('Error al obtener el usuario:', error);
       });
   }
-  
-  onImageSelected(base64Image: string) {
-    this.base64Image = base64Image; // Asigna la imagen para que se muestre en profile-icon
-    this.savePhoto(); // Llama al método para guardar la imagen
-  }
-  
 
+  // Método para cargar el perfil del usuario
+  loadUserProfile() {
+    this.authService.getCurrentUser()
+      .then(user => {
+        if (user) {
+          this.userProfile = {
+            uid: user.uid,
+            email: user.email,
+            nombre: user.nombre || 'Sin nombre'
+          };
+        }
+      })
+      .catch(error => console.error('Error al cargar el perfil:', error));
+  }
+
+  // Método para abrir el ActionSheet y elegir entre cámara o galería
+  async openImagePicker() {
+    this.isActionSheetOpen = true;
+
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Selecciona una opción',
+      buttons: [
+        {
+          text: 'Usar cámara',
+          handler: () => {
+            this.takePhoto();
+          }
+        },
+        {
+          text: 'Seleccionar de la galería',
+          handler: () => {
+            this.selectFromGallery();
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
+
+  // Método para tomar una foto con la cámara
+  takePhoto() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.savePhoto(); // Guardar la foto
+    }, (err) => {
+      console.error('Error al tomar la foto', err);
+    });
+  }
+
+  // Método para seleccionar una imagen de la galería
+  selectFromGallery() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.savePhoto(); // Guardar la foto
+    }, (err) => {
+      console.error('Error al seleccionar la foto', err);
+    });
+  }
+
+  // Método para guardar la foto en Firebase Storage
   savePhoto() {
     if (!this.base64Image) {
       console.error('No hay imagen para guardar.');
       return;
     }
-
-    this.uploadImageToFirebase(this.base64Image); // Llama al método para subir la imagen
+    this.uploadImageToFirebase(this.base64Image);
   }
 
+  // Método para subir la imagen a Firebase Storage
   uploadImageToFirebase(base64Image: string) {
     const userId = this.userProfile?.uid;
-
     if (!userId) {
       console.error('El perfil del usuario no está disponible.');
       return;
     }
 
+    // Establecer el nombre del archivo de la imagen
     const imageName = `${userId}/profile-image-${Date.now()}.png`;
     const imageRef = this.storage.ref(imageName);
 
-    imageRef.putString(base64Image, 'data_url').then(() => {
-      console.log('Imagen subida a Firebase Storage con éxito.');
+    // Subir la imagen a Firebase Storage
+    imageRef.putString(base64Image, 'data_url')
+      .then(() => {
+        console.log('Imagen subida a Firebase Storage con éxito.');
+      })
+      .catch(error => console.error('Error al subir la imagen a Firebase Storage:', error));
+  }
 
-      // Obtener la URL de descarga
-      imageRef.getDownloadURL().subscribe((url) => {
-        // Guardar la URL de la imagen en Realtime Database
-        const db = getDatabase();
-        set(ref(db, `user_images/${userId}`), {
-          image: url // Guardar la URL en la base de datos
-        }).then(() => {
-          console.log('URL de la imagen guardada en Realtime Database.');
-        }).catch((error) => {
-          console.error('Error al guardar la imagen en Realtime Database:', error);
-        });
-      });
-    }).catch(error => {
-      console.error('Error al subir la imagen a Firebase Storage:', error);
+  // Método para cambiar la opción seleccionada (listas o recetas)
+  selectOption(option: string) {
+    this.selectedOption = option;
+  }
+
+  // Método para abrir el modal
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  // Método para cerrar el modal
+  closeModal() {
+    this.modalController.dismiss();
+    this.isModalOpen = false;
+  }
+
+  // Método que se ejecuta cuando el modal se cierra
+  onModalDismiss() {
+    this.isModalOpen = false;
+  }
+
+  // Método para cerrar sesión
+  logout() {
+    this.authService.logout().then(() => {
+      console.log('Sesión cerrada');
+      this.closeModal();
+      this.router.navigate(['/login']);
+    }).catch(err => {
+      console.error('Error al cerrar sesión', err);
     });
   }
-
-  }
-
-
+}

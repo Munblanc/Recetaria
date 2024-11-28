@@ -29,8 +29,8 @@
     </ion-list-header>
 
     <ion-list>
-      <ion-item *ngFor="let ingredient of ingredients; let i = index">
-        <ion-input [(ngModel)]="ingredients[i]" placeholder="Ingrediente"></ion-input>
+      <ion-item *ngFor="let ingredient of ingredients; let i = index; trackBy: trackByIndex">
+        <ion-input [name]="'ingredient' + i" [(ngModel)]="ingredients[i]" placeholder="Ingrediente" required></ion-input>
         <ion-button fill="clear" slot="end" (click)="removeIngredient(i)">
           <ion-icon name="trash" slot="icon-only"></ion-icon>
         </ion-button>
@@ -45,8 +45,8 @@
     </ion-list-header>
 
     <ion-list>
-      <ion-item *ngFor="let instruction of instructions; let i = index">
-        <ion-input [(ngModel)]="instructions[i]" placeholder="Agregar paso"></ion-input>
+      <ion-item *ngFor="let instruction of instructions; let i = index; trackBy: trackByIndex">
+        <ion-input [name]="'instruction' + i" [(ngModel)]="instructions[i]" placeholder="Agregar paso" required></ion-input>
         <ion-button fill="clear" slot="end" (click)="removeInstruction(i)">
           <ion-icon name="trash" slot="icon-only"></ion-icon>
         </ion-button>

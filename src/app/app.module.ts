@@ -11,7 +11,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
 import { Camera } from '@ionic-native/camera/ngx';
 import { ProfilePageModule } from './pages/profile/profile.module';
-
+import { initializeApp } from 'firebase/app';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database'; 
 @NgModule({
   declarations: [
     AppComponent
@@ -21,6 +22,7 @@ import { ProfilePageModule } from './pages/profile/profile.module';
     IonicModule.forRoot(), 
     AppRoutingModule, 
     AngularFireModule.initializeApp(environment.firebaseConfig), 
+    AngularFireDatabaseModule,  // Importar este módulo para usar Firebase Realtime Database
     AngularFireAuthModule,
     AngularFireStorageModule,
     ReactiveFormsModule,
@@ -32,4 +34,9 @@ import { ProfilePageModule } from './pages/profile/profile.module';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+    constructor() {
+    // Asegurarse de que Firebase se inicializa con la configuración
+    initializeApp(environment.firebaseConfig);
+  }
+}
