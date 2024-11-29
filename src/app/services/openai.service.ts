@@ -8,17 +8,17 @@ import { initializeApp, getApps } from 'firebase/app';
 })
 export class OpenaiService {
   private openai: OpenAI;
-  private apiKey: string = '';
+  private apiKey: string = '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';
 
   constructor() {
     const firebaseConfig = {
-      apiKey: '',
-      authDomain: '',
-      databaseURL: '',
-      projectId: '',
-      storageBucket: '',
-      messagingSenderId: '',
-      appId: '',
+      apiKey: 'AIzaSyBbrSHxu7kbEsx5S3a_7-u8t04PUa3RdrQ',
+      authDomain: 'recetaria-2024.firebaseapp.com',
+      databaseURL: 'https://recetaria-2024-default-rtdb.firebaseio.com',
+      projectId: 'recetaria-2024',
+      storageBucket: 'recetaria-2024.appspot.com',
+      messagingSenderId: '439253985358',
+      appId: '1:439253985358:web:7bbe51e89835eed04fbb1f',
     };
 
     if (getApps().length === 0) {
@@ -62,11 +62,12 @@ export class OpenaiService {
   saveRecipeToFirebase(recipe: string, userId: string, username: string): Promise<void> {
     console.log('Guardando receta con el usuario:', username);
     const db = getDatabase();
-    const recipeRef = push(ref(db, 'recipes/' + userId)); // Agrega una nueva receta bajo el ID del usuario
-
+    const recipeRef = push(ref(db, 'recipes/' + userId)); // Genera una referencia única para la receta
+  
     return set(recipeRef, {
       recipe: recipe,
       username: username,
+      createdAt: new Date().toISOString(),  // Agregar la fecha de creación para ayudar a ordenar
     })
       .then(() => {
         console.log('Receta guardada en Firebase');
@@ -75,4 +76,4 @@ export class OpenaiService {
         console.error('Error al guardar receta en Firebase', error);
       });
   }
-}
+}  

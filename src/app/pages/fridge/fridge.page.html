@@ -8,19 +8,16 @@
 </ion-header>
 
 <ion-content>
-  <!-- Texto introductorio para la página -->
   <div class="intro-text">
     <p>
       Bienvenido a tu espacio de recetas guardadas. Aquí puedes ver todas las recetas que has almacenado. 
       Si encuentras alguna receta que ya no necesitas, puedes eliminarla con facilidad. ¡Empieza a explorar!
     </p>
   </div>
-
-  <!-- Mostrar indicador de carga mientras se cargan las recetas -->
   <ion-spinner *ngIf="loading" name="crescent" class="loading-spinner"></ion-spinner>
 
   <!-- Mostrar las recetas guardadas -->
-  <div *ngIf="recipes.length > 0">
+  <div *ngIf="recipes.length > 0" class="recipe-container">
     <ion-list class="recipe-list">
       <ion-item *ngFor="let recipe of recipes">
         <ion-label class="recipe-name">{{ recipe.recipe }}</ion-label> <!-- Mostrar el nombre de la receta -->

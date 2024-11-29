@@ -1,101 +1,92 @@
+/* Estilos generales */
 ion-content {
-  --background: #fafafa; /* Fondo claro */
+  --background: #fff;  /* Fondo blanco */
   padding: 16px;
+  color: #000; /* Texto negro */
 }
+ ion-label{
+  color: #000;
+  background-color: white;
+ }
 
-ion-toolbar {
-  background-color: #ffffff; /* Blanco para el header */
-  --color: #333; /* Texto oscuro */
-  border-bottom: 1px solid #ddd; /* Línea sutil en la parte inferior */
-}
-
-ion-back-button {
-  color: #333; /* Color de texto oscuro */
-}
-
-h1, h2 {
-  font-size: 1.4em;
-  font-weight: 600;
-  color: #333;
-  text-align: center;
-  margin: 0;
-}
-
-p {
-  font-size: 1em;
-  color: #666; /* Gris oscuro */
-  line-height: 1.6;
-  text-align: center;
-}
-
-/* Estilo para el texto introductorio */
+ item-native{
+  color: white;
+  background-color: white;
+ }
+/* Estilos para la introducción de texto */
 .intro-text {
-  background-color: #fff;
-  padding: 15px;
   margin-bottom: 20px;
-  border-radius: 8px;
-  font-size: 1em;
-  color: #666;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #000; /* Texto negro */
 }
 
-/* Estilo para las recetas guardadas */
-.recipe-list {
+.intro-text p {
+  line-height: 1.6;
+}
+
+/* Spinner de carga */
+.loading-spinner {
+  display: block;
+  margin: 30px auto;
+}
+
+/* Contenedor de la lista de recetas */
+.recipe-container {
   margin-top: 20px;
+}
+
+.recipe-list {
+  padding: 0;
 }
 
 ion-item {
-  background-color: #fff;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  font-size: 1em;
-  color: #333;
-  border: 1px solid #e0e0e0; /* Borde sutil */
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;  /* Fondo blanco */
+  color: #000; /* Texto negro */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-ion-item .recipe-name {
-  font-weight: 500;
+.recipe-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000; /* Texto negro */
+  flex: 1;
 }
 
-/* Botón de eliminar */
-ion-button {
-  --background: transparent; /* Botón sin fondo */
-  --color: #e74c3c; /* Rojo para eliminar */
-  font-weight: normal;
-  padding: 0 8px;
-  text-transform: uppercase;
-  font-size: 0.9em;
+/* Estilos para el botón de eliminar */
+ion-button[color='danger'] {
+  --background: #ff4d4d;
+  --color: white;
+  --border-radius: 8px;
 }
 
-ion-button:focus {
-  outline: none; /* Eliminar el contorno al hacer clic */
+ion-button[color='danger'] ion-icon {
+  margin-right: 8px;
 }
 
+/* Estilos cuando no hay recetas */
 .no-recipes {
   text-align: center;
-  font-size: 1.1em;
-  color: #999;
-  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #000; /* Texto negro */
+  margin-top: 50px;
 }
 
-/* Botón "Buscar receta" */
+/* Estilo del contenedor de "Buscar receta" */
 .ask-ai-container {
-  display: flex;
-  justify-content: center;
   margin-top: 30px;
 }
 
 .ask-ai-container ion-button {
-  --background: transparent;
-  --color: #007bff; /* Azul */
-  --border-radius: 50px;
-  border: 1px solid #007bff;
-  padding: 10px 0;
-  font-weight: 500;
-  text-transform: uppercase;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 25px;
+  font-weight: bold;
 }
 
+/* Añadir hover al botón de "Buscar receta" */
 .ask-ai-container ion-button:hover {
-  --color: #0056b3; /* Azul más oscuro al pasar el mouse */
-  border: 1px solid #0056b3;
+  background-color: #45a049;
 }

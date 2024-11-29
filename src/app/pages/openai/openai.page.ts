@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { OpenaiService } from 'src/app/services/openai.service';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';  // Asegúrate de importar Router
 
 @Component({
   selector: 'app-openai',
@@ -21,7 +22,8 @@ export class OpenaiPage implements OnInit {
   constructor(
     private authService: AuthService,
     private openaiService: OpenaiService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private router: Router  // Asegúrate de importar Router
   ) {}
 
   ngOnInit() {
@@ -75,13 +77,20 @@ export class OpenaiPage implements OnInit {
             text: 'Guardar',
             handler: () => {
               this.isRecipeSaved = true;
-
+  
               // Guardar en Firebase
-              this.openaiService.saveRecipeToFirebase(this.recipe, this.userId, this.username);
-
+              this.openaiService.saveRecipeToFirebase(this.recipe, this.userId, this.username)
+                .then(() => {
+                  console.log('Receta guardada en Firebase');
+                  // Redirigir a la página de recetas guardadas (fridge)
+                  this.router.navigate(['/tabs/fridge']);
+                })
+                .catch((error) => {
+                  console.error('Error al guardar receta:', error);
+                });
+  
               // Guardar localmente en memoria compartida
               OpenaiPage.savedRecipes.push(this.recipe);
-
               console.log('Receta guardada localmente y en Firebase:', this.recipe);
             }
           }
@@ -92,6 +101,7 @@ export class OpenaiPage implements OnInit {
       console.error('Error al guardar la receta:', error);
     }
   }
+  
 
   resetSearch() {
     this.recipe = '';

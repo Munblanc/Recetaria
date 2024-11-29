@@ -12,17 +12,15 @@ export class RecipeService {
   constructor(private db: AngularFireDatabase) { }
 
   // Obtener todas las recetas en tiempo real
-  getRecipes(): Observable<any[]> {
-    return this.recipesRef.valueChanges();  // Devuelve un observable con las recetas
+  getRecipes(list: string): Observable<any[]> {
+    return this.db.list(list).valueChanges();  // Cambia 'recipes' por el nombre de la lista que desees
   }
-
-  // Guardar una nueva receta en Firebase
-  saveRecipe(recipe: any): void {
-    this.recipesRef.push(recipe);  // Guardar la receta en Firebase
+  
+  saveRecipe(list: string, recipe: any): void {
+    this.db.list(list).push(recipe);  // Guarda en la lista correspondiente
   }
-
-  // Eliminar una receta de Firebase por su ID
-  deleteRecipe(recipeId: string): void {
-    this.db.list('recipes').remove(recipeId);
+  
+  deleteRecipe(list: string, recipeId: string): void {
+    this.db.list(list).remove(recipeId);  // Elimina de la lista correspondiente
   }
-}
+}  

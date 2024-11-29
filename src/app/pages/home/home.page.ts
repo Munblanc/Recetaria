@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipeService } from '../../services/recipe.service';  // Importamos el servicio
+import { RecipeService } from '../../services/recipe.service';  // Asegúrate de que RecipeService esté importado correctamente
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -17,18 +17,14 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Obtener recetas desde Firebase al iniciar el componente
-    this.recipeService.getRecipes().subscribe(data => {
-      this.recipes = data;  // Asignar las recetas obtenidas
+    this.loadRecipes();  // Cargar recetas cuando la página se inicializa
+  }
+
+  // Cargar las recetas desde Firebase desde la lista 'homeRecipes'
+  loadRecipes() {
+    this.recipeService.getRecipes('homeRecipes').subscribe(data => {
+      this.recipes = data;  // Asignar las recetas obtenidas desde Firebase
     });
-  }
-
-  irAOpenAI() {
-    this.navCtrl.navigateForward('/openai');
-  }
-
-  irAShare() {
-    this.navCtrl.navigateForward('/tabs/share');
   }
 
   // Método para filtrar recetas
@@ -41,9 +37,18 @@ export class HomePage implements OnInit {
     );
   }
 
+  // Método para eliminar receta
   deleteRecipe(index: number) {
-    const recipeId = this.recipes[index].id;  // Obtenemos el ID de la receta
-    this.recipeService.deleteRecipe(recipeId);  // Eliminamos la receta de Firebase
+    const recipeId = this.recipes[index].id;  // Obtén el ID de la receta
+    this.recipeService.deleteRecipe('homeRecipes', recipeId);  // Eliminar de 'homeRecipes' en Firebase
     this.recipes.splice(index, 1);  // Eliminar de la lista local
+  }
+
+  irAOpenAI() {
+    this.navCtrl.navigateForward('/openai');
+  }
+
+  irAShare() {
+    this.navCtrl.navigateForward('/tabs/share');
   }
 }

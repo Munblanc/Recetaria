@@ -3,7 +3,7 @@ import { OpenaiService } from 'src/app/services/openai.service';
 import { AuthService } from '../../auth.service';
 import { getDatabase, ref, get, remove } from 'firebase/database';
 import { Router } from '@angular/router';  // Importar Router
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-fridge',
   templateUrl: './fridge.page.html',
@@ -15,6 +15,7 @@ export class FridgePage implements OnInit {
   loading: boolean = true; // Indicador de carga
 
   constructor(
+    private changeDetector: ChangeDetectorRef,
     private openaiService: OpenaiService,
     private authService: AuthService,
     private router: Router
@@ -24,35 +25,40 @@ export class FridgePage implements OnInit {
     // Obtener el userId del usuario logueado
     this.authService.getCurrentUser().then(user => {
       if (user) {
-        this.userId = user.uid;  // Asignamos el UID del usuario actual
-        this.loadSavedRecipes();  // Cargamos las recetas guardadas
-      }
-    });
-  }
-
-  // Método para cargar las recetas desde Firebase
-  loadSavedRecipes() {
-    const db = getDatabase();  // Usamos getDatabase para obtener la instancia de la base de datos
-    const recipeRef = ref(db, 'recipes/' + this.userId); // Referencia a las recetas del usuario
-
-    get(recipeRef).then((snapshot) => {
-      this.loading = false; // Desactivamos el indicador de carga
-
-      if (snapshot.exists()) {
-        const recipesArray: any[] = [];
-        snapshot.forEach((childSnapshot) => {
-          const recipeData = childSnapshot.val();
-          recipesArray.push({ ...recipeData, id: childSnapshot.key });  // Agregamos el ID de Firebase
-        });
-        this.recipes = recipesArray;  // Asignamos las recetas cargadas
-      } else {
-        console.log('No hay recetas guardadas');
+        this.userId = user.uid; // Asignamos el UID del usuario actual
+        console.log('Usuario actual:', user);
+        this.loadSavedRecipes(); // Cargamos las recetas guardadas
       }
     }).catch((error) => {
-      this.loading = false; // Desactivamos el indicador de carga si ocurre un error
-      console.error('Error al cargar las recetas:', error);
+      console.error('Error al obtener usuario:', error);
     });
   }
+  
+  // Método para cargar las recetas desde Firebase
+// Método para cargar las recetas desde Firebase
+loadSavedRecipes() {
+  const db = getDatabase();
+  const recipeRef = ref(db, 'recipes/' + this.userId);
+
+  get(recipeRef).then((snapshot) => {
+    this.loading = false;
+    if (snapshot.exists()) {
+      const recipesArray: any[] = [];
+      snapshot.forEach((childSnapshot) => {
+        const recipeData = childSnapshot.val();
+        recipesArray.push({ ...recipeData, id: childSnapshot.key });
+      });
+      this.recipes = recipesArray;
+      this.changeDetector.detectChanges(); // Forzamos la detección de cambios
+    } else {
+      this.recipes = [];
+    }
+  }).catch((error) => {
+    this.loading = false;
+    console.error('Error al cargar las recetas:', error);
+  });
+}
+
 
   // Método para eliminar una receta de Firebase
   deleteRecipe(recipeId: string) {

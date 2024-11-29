@@ -185,9 +185,11 @@ export class ProfilePage {
     this.authService.logout().then(() => {
       console.log('Sesión cerrada');
       this.closeModal();
-      this.router.navigate(['/login']);
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 100);  // Retardo de 100ms para asegurar que el modal se cierre antes de navegar
     }).catch(err => {
       console.error('Error al cerrar sesión', err);
     });
   }
-}
+}  

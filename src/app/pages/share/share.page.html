@@ -17,7 +17,7 @@
   <!-- Formulario -->
   <form (ngSubmit)="saveShare()">
     <ion-item>
-      <ion-label position="floating">Nombre :</ion-label>
+      <ion-label position="floating">Nombre de la receta :</ion-label>
       <ion-input name="recipeName" [(ngModel)]="shareName" required></ion-input>
     </ion-item>
 
@@ -53,6 +53,8 @@
       </ion-item>
     </ion-list>
 
-    <ion-button expand="block" type="submit">Guardar</ion-button>
+    <ion-button expand="block" type="submit" [disabled]="!shareName || !ingredients.length || !instructions.length">
+      Guardar receta
+    </ion-button>
   </form>
 </ion-content>
