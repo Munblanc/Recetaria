@@ -8,7 +8,7 @@ import { initializeApp, getApps } from 'firebase/app';
 })
 export class OpenaiService {
   private openai: OpenAI;
-  private apiKey: string = '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';
+  private apiKey: string = 'PONER_APY_KEY';
 
   constructor() {
     const firebaseConfig = {
