@@ -93,4 +93,12 @@ export class AuthService {
       console.error('Error al cerrar sesión', err);
     });
   }
+
+  isAdminUser(): Observable<boolean> {
+    return this.afAuth.authState.pipe(
+      map((user: firebase.User | null) => {
+        return user?.email === 'admin@admin.com';
+      })
+    );
+  }
 }

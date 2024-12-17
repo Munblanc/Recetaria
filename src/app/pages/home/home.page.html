@@ -12,8 +12,8 @@
         id="searchbar"
         placeholder="Buscar recetas"
         animated="true"
-        [(ngModel)]="searchTerm" 
-        debounce="500"  
+        [(ngModel)]="searchTerm"
+        debounce="500"
       ></ion-searchbar>
     </ion-toolbar>
     <div>
@@ -29,9 +29,9 @@
         </ion-button>
       </ion-header>
     </div>
-    <ion-button 
-      size="small" 
-      color="custom-color" 
+    <ion-button
+      size="small"
+      color="custom-color"
       id="compartebtn"
       (click)="irAShare()"
     >
@@ -39,7 +39,7 @@
       Comparte tu receta
     </ion-button>
   </div>
-  
+
   <!-- Mostrar las recetas guardadas -->
   <div id="cartamenu">
     <ion-card *ngFor="let recipe of filteredRecipes; let i = index">
@@ -49,7 +49,9 @@
       <ion-card-content>
         <p><strong>Ingredientes:</strong></p>
         <ul *ngIf="recipe.ingredients.length > 0; else noIngredients">
-          <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+          <li *ngFor="let ingredient of recipe.ingredients">
+            {{ ingredient }}
+          </li>
         </ul>
         <ng-template #noIngredients>
           <p>No hay ingredientes.</p>
@@ -57,14 +59,16 @@
 
         <p><strong>Instrucciones:</strong></p>
         <ul *ngIf="recipe.instructions.length > 0; else noInstructions">
-          <li *ngFor="let instruction of recipe.instructions">{{ instruction }}</li>
+          <li *ngFor="let instruction of recipe.instructions">
+            {{ instruction }}
+          </li>
         </ul>
         <ng-template #noInstructions>
           <p>No hay instrucciones.</p>
         </ng-template>
 
         <!-- Botón para eliminar la receta -->
-        <ion-button color="danger" (click)="deleteRecipe(i)">
+        <ion-button *ngIf="isAdmin" color="danger" (click)="deleteRecipe(i)">
           Eliminar
         </ion-button>
       </ion-card-content>

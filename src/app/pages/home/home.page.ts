@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';  // Asegúrate de que RecipeService esté importado correctamente
 import { NavController } from '@ionic/angular';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-home',
@@ -10,14 +11,19 @@ import { NavController } from '@ionic/angular';
 export class HomePage implements OnInit {
   recipes: any[] = [];
   searchTerm: string = '';  // Modelo de búsqueda
+  isAdmin = false;
 
   constructor(
     private recipeService: RecipeService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     this.loadRecipes();  // Cargar recetas cuando la página se inicializa
+    this.authService.isAdminUser().subscribe(isAdmin => {
+      this.isAdmin = isAdmin;
+    });
   }
 
   // Cargar las recetas desde Firebase desde la lista 'homeRecipes'

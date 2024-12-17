@@ -13,7 +13,22 @@
   <!-- Mostrar receta obtenida -->
   <div *ngIf="recipe && !isRecipeSaved" class="recipe-container">
     <h2>Receta Generada:</h2>
-    <p>{{ recipe }}</p>
+
+    <div *ngIf="recipe && !isRecipeSaved" class="recipe-container">
+      <h2>{{ recipe.nombre }}</h2>
+
+      <h3>Ingredientes:</h3>
+      <ul>
+        <li *ngFor="let ingrediente of recipe.ingredientes">
+          {{ ingrediente }}
+        </li>
+      </ul>
+
+      <h3>Instrucciones:</h3>
+      <ol>
+        <li *ngFor="let paso of recipe.instrucciones">{{ paso }}</li>
+      </ol>
+    </div>
 
     <!-- Botón para guardar la receta -->
     <ion-button expand="full" (click)="saveRecipe()">
@@ -23,7 +38,10 @@
 
   <!-- Mostrar mensaje cuando no haya receta -->
   <div *ngIf="!recipe && !loading && !isRecipeSaved" class="no-recipes">
-    <p>No se han encontrado recetas. Ingresa los ingredientes para obtener sugerencias.</p>
+    <p>
+      No se han encontrado recetas. Ingresa los ingredientes para obtener
+      sugerencias.
+    </p>
   </div>
 
   <!-- Campo de entrada de ingredientes -->
@@ -33,22 +51,35 @@
       <ion-input
         [(ngModel)]="ingredients"
         placeholder="Ingresa tus ingredientes aquí:"
-        style="--background: transparent; --placeholder-opacity: 0.6;"
+        style="--background: transparent; --placeholder-opacity: 0.6"
       ></ion-input>
     </ion-item>
   </div>
 
   <!-- Botón para obtener receta -->
-  <ion-button expand="full" (click)="getRecipes()" [disabled]="!canGetRecipes()">
+  <ion-button
+    expand="full"
+    (click)="getRecipes()"
+    [disabled]="!canGetRecipes()"
+  >
     <ion-icon slot="start" name="search-outline"></ion-icon>
     Obtener Recetas
   </ion-button>
 
   <!-- Indicador de carga mientras se obtiene receta -->
-  <ion-spinner *ngIf="loading" name="crescent" class="loading-spinner"></ion-spinner>
+  <ion-spinner
+    *ngIf="loading"
+    name="crescent"
+    class="loading-spinner"
+  ></ion-spinner>
 
   <!-- Botón para reiniciar búsqueda de recetas -->
-  <ion-button expand="full" fill="clear" *ngIf="recipe && !isRecipeSaved" (click)="resetSearch()">
+  <ion-button
+    expand="full"
+    fill="clear"
+    *ngIf="recipe && !isRecipeSaved"
+    (click)="resetSearch()"
+  >
     Buscar otra receta
   </ion-button>
 </ion-content>

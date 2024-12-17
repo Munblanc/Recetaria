@@ -8,7 +8,7 @@ import { initializeApp, getApps } from 'firebase/app';
 })
 export class OpenaiService {
   private openai: OpenAI;
-  private apiKey: string = 'PONER_APY_KEY';
+  private apiKey: string = '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';
 
   constructor() {
     const firebaseConfig = {
@@ -41,7 +41,7 @@ export class OpenaiService {
           {
             role: 'system',
             content:
-              'Eres un experto chef profesional, saluda y genera solo una receta clara solo con los ingredientes entregados, especifíca los gramos y ml.',
+              'Eres un chef profesional experto. Devuelve solo una receta clara y sólo la respuesta en JSON, nada más, no pongas ´´´json{}´´´. La estructura del JSON debe ser: {receta: {nombre: "", ingredientes: [], instrucciones: []}}.',
           },
           { role: 'user', content: prompt },
         ],

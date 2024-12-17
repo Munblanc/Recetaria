@@ -4,6 +4,15 @@ import { OpenaiService } from 'src/app/services/openai.service';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';  // Asegúrate de importar Router
 
+interface Recipe {
+  receta: string;
+  nombre: string;
+  ingredientes: string[];
+  instrucciones: string[];
+}
+
+
+
 @Component({
   selector: 'app-openai',
   templateUrl: './openai.page.html',
@@ -11,13 +20,14 @@ import { Router } from '@angular/router';  // Asegúrate de importar Router
 })
 export class OpenaiPage implements OnInit {
   ingredients: string = ''; // Almacena los ingredientes ingresados por el usuario
-  recipe: string = ''; // Almacena una receta generada
+  recipe: Recipe | null = null;
+  //recipe: string = ''; // Almacena una receta generada
   loading: boolean = false; // Controla el estado de carga (para mostrar spinner)
   isRecipeSaved: boolean = false; // Verifica si la receta ha sido guardada
   userId: string = ''; // ID del usuario
   username: string = ''; // Nombre del usuario
 
-  static savedRecipes: string[] = []; // Recetas compartidas entre páginas
+  static savedRecipes: Recipe[] = []; // Recetas compartidas entre páginas
 
   constructor(
     private authService: AuthService,
@@ -43,7 +53,7 @@ export class OpenaiPage implements OnInit {
   }
 
   // Método para obtener la receta
-  getRecipes() {
+  /* getRecipes() {
     if (this.ingredients.trim()) {
       this.loading = true;
       this.openaiService.getRecipe(this.ingredients).then((recipeContent) => {
@@ -57,10 +67,67 @@ export class OpenaiPage implements OnInit {
     } else {
       console.warn('Por favor ingrese los ingredientes');
     }
-  }
+  } */
 
+    getRecipes() {
+      if (this.ingredients.trim()) {
+        this.loading = true;
+    
+        this.openaiService.getRecipe(this.ingredients)
+          .then((recipeContent) => {
+            try {
+              // Parsear directamente el contenido de la respuesta
+              const parsedResponse = JSON.parse(recipeContent);
+    
+              // Asignar el objeto receta desde la respuesta
+              this.recipe = parsedResponse.receta;
+              console.log('Receta obtenida:', this.recipe);
+            } catch (error) {
+              console.error('Error al parsear el JSON:', error);
+              this.recipe = null; // Limpia la receta en caso de error
+            } finally {
+              this.loading = false; // Detener el indicador de carga
+            }
+          })
+          .catch((error) => {
+            console.error('Error al obtener receta:', error);
+            this.loading = false; // Detener el indicador de carga en caso de error
+          });
+      }
+    }
+
+
+    async saveRecipe() {
+      if (!this.recipe) return;
+    
+      const alert = await this.alertController.create({
+        header: 'Confirmación',
+        message: '¿Quieres guardar esta receta?',
+        buttons: [
+          { text: 'Cancelar', role: 'cancel' },
+          {
+            text: 'Guardar',
+            handler: () => {
+              this.isRecipeSaved = true;
+    
+              // Convertir la receta a JSON string
+              const recipeString = JSON.stringify(this.recipe);
+    
+              this.openaiService.saveRecipeToFirebase(recipeString, this.userId, this.username)
+                .then(() => this.router.navigate(['/tabs/fridge']))
+                .catch((error) => console.error('Error al guardar en Firebase:', error));
+    
+              // Guardar en memoria compartida (sin conversión)
+              OpenaiPage.savedRecipes.push(this.recipe);
+            },
+          },
+        ],
+      });
+    
+      await alert.present();
+    }
   // Método para guardar la receta en Firebase y en memoria compartida
-  async saveRecipe() {
+  /* async saveRecipe() {
     try {
       const alert = await this.alertController.create({
         header: 'Confirmación',
@@ -100,11 +167,11 @@ export class OpenaiPage implements OnInit {
     } catch (error) {
       console.error('Error al guardar la receta:', error);
     }
-  }
+  } */
   
 
   resetSearch() {
-    this.recipe = '';
+    this.recipe = null;
     this.ingredients = '';
     this.isRecipeSaved = false;
     this.loading = false;
