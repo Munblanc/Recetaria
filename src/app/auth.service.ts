@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import firebase from 'firebase/compat/app';
+import { getDatabase, ref, set, get } from 'firebase/database';
 
 @Injectable({
   providedIn: 'root',
@@ -94,10 +95,34 @@ export class AuthService {
     });
   }
 
-  isAdminUser(): Observable<boolean> {
+  /* isAdminUser(): Observable<boolean> {
     return this.afAuth.authState.pipe(
       map((user: firebase.User | null) => {
         return user?.email === 'admin@admin.com';
+      })
+    );
+  } */
+
+  async isUserAdmin(uid: string): Promise<boolean> {
+    const db = getDatabase();
+    const userRoleRef = ref(db, `userRoles/${uid}`);
+    
+    try {
+      const snapshot = await get(userRoleRef);
+      return snapshot.exists() && snapshot.val().isAdmin === true;
+    } catch (error) {
+      console.error('Error al verificar rol de admin:', error);
+      return false;
+    }
+  }
+
+  isCurrentUserAdmin(): Observable<boolean> {
+    return this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (!user) {
+          return from(Promise.resolve(false));
+        }
+        return from(this.isUserAdmin(user.uid));
       })
     );
   }
